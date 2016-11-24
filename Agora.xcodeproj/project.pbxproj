@@ -107,9 +107,7 @@
 		E22BC6771DE50DED00A34C59 /* Agora */ = {
 			isa = PBXGroup;
 			children = (
-				E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */,
-				E296A0F31DE78B3300007AC1 /* SCLAlertView */,
-				E296A0D41DE772A400007AC1 /* Firebase */,
+				E2EA0F111DE7B3A60032048D /* Frameworks */,
 				E2EFE7681DE75118002E8003 /* Controller */,
 				E2EFE7671DE75114002E8003 /* View */,
 				E2EFE7661DE7510C002E8003 /* Modal */,
@@ -159,6 +157,16 @@
 				E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */,
 			);
 			name = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
+		E2EA0F111DE7B3A60032048D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */,
+				E296A0F31DE78B3300007AC1 /* SCLAlertView */,
+				E296A0D41DE772A400007AC1 /* Firebase */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E2EFE7661DE7510C002E8003 /* Modal */ = {

@@ -23,7 +23,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ9-iN-hXL">
@@ -219,7 +219,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hUV-Pk-0JI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="wew" id="qpw-jO-nWp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8N-L7-OzY" customClass="TPKeyboardAvoidingScrollView">
@@ -418,7 +418,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GaX-0s-08U"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tAQ-Jy-V4S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CupertinoHSStudentUnionQuad_850w" translatesAutoresizingMaskIntoConstraints="NO" id="GMU-eZ-yhX">
@@ -612,7 +612,7 @@ money to attend the 2017 National Leadership Conference!</string>
                         <viewControllerLayoutGuide type="bottom" id="vPa-Mm-AgQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mbj-WK-cvZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CupertinoHSStudentUnionQuad_850w" translatesAutoresizingMaskIntoConstraints="NO" id="odT-0t-O1S">
