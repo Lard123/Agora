@@ -18,6 +18,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        self.beginLoading()
         getData()
         let screenWidth = UIScreen.main.bounds.size.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -54,6 +55,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         items.append(i)
         i = Item(name: "Nintendo DS Game Cartridges", condition: "Slightly Used", owner: "Shreyas Patankar", image: #imageLiteral(resourceName: "game-pile"), cost: 24)
         items.append(i)
+        self.endLoading()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

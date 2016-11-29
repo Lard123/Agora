@@ -47,16 +47,31 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func signIn(_ sender: AnyObject) {
-        FIRAuth.auth()?.signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
-            if error == nil {
-                self.performSegue(withIdentifier: "toIntroVC", sender: self)
-            } else {
-                let errText = (error?.localizedDescription)!
-                print(error)
-                if errText == "An internal error has occurred, print and inspect the error details for more information." {
-                    SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+        let email = usernameField.text!
+        let password = passwordField.text!
+        if email == "" {
+            SCLAlertView().showError("Login Error", subTitle: "Please enter an email.")
+            usernameField.attributedPlaceholder = NSAttributedString(string:"EMAIL",
+                                                                  attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if password == "" {
+            SCLAlertView().showError("Login Error", subTitle: "Please enter an password.")
+            passwordField.attributedPlaceholder = NSAttributedString(string:"PASSWORD",
+                                                                     attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else {
+            self.beginLoading()
+            FIRAuth.auth()?.signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
+                if error == nil {
+                    self.endLoading()
+                    self.performSegue(withIdentifier: "toIntroVC", sender: self)
                 } else {
-                    SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                    self.endLoading()
+                    let errText = (error?.localizedDescription)!
+                    print(error)
+                    if errText == "An internal error has occurred, print and inspect the error details for more information." {
+                        SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+                    } else {
+                        SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                    }
                 }
             }
         }
@@ -71,6 +86,9 @@ class LogInVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func signUpWithFacebook(_ sender: AnyObject) {
+        
+    }
 
 
 }
@@ -85,6 +103,23 @@ public extension UIViewController {
     
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func beginLoading() {
+        let alert = UIAlertController(title: "Loading...", message: nil, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = .whiteLarge
+        loadingIndicator.color = UIColor(red:0.20, green:0.29, blue:0.37, alpha:1.00)
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func endLoading() {
+        dismiss(animated: false, completion: nil)
     }
 }
 

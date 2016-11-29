@@ -40,11 +40,15 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         school.imageName = "dusty.png"
         school.title = "Cupertino High School"
         school.subtitle = "10100 Finch Ave, Cupertino, CA 95014"
-        self.mapView.showAnnotations([school], animated: true)
-        self.mapView.selectAnnotation(school, animated: true)
+        mapView.addAnnotation(school)
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: school.coordinate.latitude, longitude: school.coordinate.longitude), span: MKCoordinateSpanMake(0.075, 0.075))
+        mapView.setRegion(region, animated: true)
+        self.mapView.selectAnnotation(school, animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,7 +78,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
     @IBAction func goToCupertinoHigh(_ sender: AnyObject) {
         let coordinate = CLLocationCoordinate2DMake(school.coordinate.latitude, school.coordinate.longitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
-        mapItem.name = "Directions to Cupertino High School"
+        mapItem.name = "Cupertino High School"
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 

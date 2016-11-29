@@ -11,6 +11,7 @@
 		E22BC67B1DE50DED00A34C59 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BC67A1DE50DED00A34C59 /* LogInVC.swift */; };
 		E22BC67E1DE50DED00A34C59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22BC67C1DE50DED00A34C59 /* Main.storyboard */; };
 		E22BC6831DE50DED00A34C59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22BC6811DE50DED00A34C59 /* LaunchScreen.storyboard */; };
+		E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23152521DEBAD3800797269 /* AddNewItemVC.swift */; };
 		E267D2B71DE67DF3003B3F00 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267D2B61DE67DF3003B3F00 /* IntroVC.swift */; };
 		E267D2B91DE68D92003B3F00 /* login.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E267D2B81DE68D92003B3F00 /* login.mp4 */; };
 		E267D2C11DE6A989003B3F00 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267D2C01DE6A989003B3F00 /* Item.swift */; };
@@ -31,8 +32,24 @@
 		E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */; };
 		E296A1031DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */; };
+		E2EA794E1DEBDE4F007128E2 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; };
+		E2EA794F1DEBDE4F007128E2 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2EFE7711DE75304002E8003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EFE76F1DE752FB002E8003 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2EA79501DEBDE4F007128E2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E2EA794F1DEBDE4F007128E2 /* ImagePicker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E22BC6751DE50DED00A34C59 /* Agora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agora.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +58,7 @@
 		E22BC67D1DE50DED00A34C59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E22BC6821DE50DED00A34C59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E22BC6841DE50DED00A34C59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E23152521DEBAD3800797269 /* AddNewItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewItemVC.swift; sourceTree = "<group>"; };
 		E267D2B61DE67DF3003B3F00 /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E267D2B81DE68D92003B3F00 /* login.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login.mp4; sourceTree = "<group>"; };
 		E267D2C01DE6A989003B3F00 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -65,6 +83,7 @@
 		E296A1011DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionVC.swift; sourceTree = "<group>"; };
+		E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
 		E2EFE76F1DE752FB002E8003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E296A0EE1DE785A400007AC1 /* FirebaseDatabase.framework in Frameworks */,
+				E2EA794E1DEBDE4F007128E2 /* ImagePicker.framework in Frameworks */,
 				E296A0E21DE7738C00007AC1 /* FirebaseCore.framework in Frameworks */,
 				E296A0DA1DE772C700007AC1 /* GTMSessionFetcher.framework in Frameworks */,
 				E296A0E31DE7738C00007AC1 /* FirebaseInstanceID.framework in Frameworks */,
@@ -162,6 +182,7 @@
 		E2EA0F111DE7B3A60032048D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */,
 				E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */,
 				E296A0F31DE78B3300007AC1 /* SCLAlertView */,
 				E296A0D41DE772A400007AC1 /* Firebase */,
@@ -189,6 +210,7 @@
 		E2EFE7681DE75118002E8003 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E23152521DEBAD3800797269 /* AddNewItemVC.swift */,
 				E267D2B61DE67DF3003B3F00 /* IntroVC.swift */,
 				E22BC67A1DE50DED00A34C59 /* LogInVC.swift */,
 				E296A0EB1DE77B1300007AC1 /* NewAccountVC.swift */,
@@ -207,6 +229,7 @@
 				E22BC6711DE50DED00A34C59 /* Sources */,
 				E22BC6721DE50DED00A34C59 /* Frameworks */,
 				E22BC6731DE50DED00A34C59 /* Resources */,
+				E2EA79501DEBDE4F007128E2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */,
 				E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */,
 				E267D2C11DE6A989003B3F00 /* Item.swift in Sources */,
 				E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */,

@@ -42,17 +42,38 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let password = passwordLabel.text!
         let phone = phoneLabel.text!
         let name = nameLabel.text!
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if error == nil {
-                self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": self.imageToBase64(image: self.imageView.image!)])
-                self.performSegue(withIdentifier: "unwindToLogin", sender: self)
-            } else {
-                let errText = (error?.localizedDescription)!
-                print(error)
-                if errText == "An internal error has occurred, print and inspect the error details for more information." {
-                    SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+        let reenterPassword = reenterPasswordLabel.text!
+        if name == "" {
+            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a name.")
+            nameLabel.attributedPlaceholder = NSAttributedString(string:"Full Name",
+                                                                  attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if email == "" {
+            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter an email.")
+            emailLabel.attributedPlaceholder = NSAttributedString(string:"Email",
+                                                                 attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if phone == "" {
+            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a phone number.")
+            phoneLabel.attributedPlaceholder = NSAttributedString(string:"Phone Number",
+                                                                  attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if password == "" {
+            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a password")
+            passwordLabel.attributedPlaceholder = NSAttributedString(string:"Password",
+                                                                  attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if password != reenterPassword {
+            SCLAlertView().showError("Password Mismatch", subTitle: "Entered passwords do not match.")
+        } else {
+            FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+                if error == nil {
+                    self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": self.imageToBase64(image: self.imageView.image!)])
+                    self.performSegue(withIdentifier: "unwindToLogin", sender: self)
                 } else {
-                    SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                    let errText = (error?.localizedDescription)!
+                    print(error)
+                    if errText == "An internal error has occurred, print and inspect the error details for more information." {
+                        SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+                    } else {
+                        SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                    }
                 }
             }
         }
