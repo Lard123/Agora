@@ -55,7 +55,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         items.append(i)
         i = Item(name: "Nintendo DS Game Cartridges", condition: "Slightly Used", owner: "Shreyas Patankar", image: #imageLiteral(resourceName: "game-pile"), cost: 24)
         items.append(i)
-        self.endLoading()
+        self.endLoading(vc: self, dismissVC: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

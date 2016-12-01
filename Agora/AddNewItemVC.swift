@@ -8,6 +8,8 @@
 
 import UIKit
 import ImagePicker
+import FirebaseDatabase
+import Firebase
 
 class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -19,11 +21,16 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var conditionLabel: UILabel!
+    
     var itemImages = [UIImage]()
+    
+    var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        ref = FIRDatabase.database().reference()
         collectionView.delegate = self
         collectionView.dataSource = self
         descriptionTextView.delegate = self
@@ -89,7 +96,49 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         return cell
     }
     
+    @IBAction func itemConditionTapped(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "Select the appropriate condition for the item you intend to sell", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "New with Tags", style: .default, handler: {
+            action in
+            self.conditionLabel.text = "Selected Condition: New with Tags"
+        }))
+        alert.addAction(UIAlertAction(title: "Slightly Used", style: .default, handler: {
+            action in
+            self.conditionLabel.text = "Selected Condition: Slightly Used"
+
+        }))
+        alert.addAction(UIAlertAction(title: "Pre-owned", style: .default, handler: {
+            action in
+            self.conditionLabel.text = "Selected Condition: Pre-owned"
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    @IBAction func submitItem(_ sender: AnyObject) {
+        print("pass")
+        self.beginLoading()
+        var imgStore = Dictionary<String, Any>()
+        for (ind, img) in itemImages.enumerated() {
+            imgStore["image\(ind + 1)"] = imageToBase64(image: UIImage(data: UIImageJPEGRepresentation(img, 0.5)!)!)
+        }
+        let userID = (FIRAuth.auth()?.currentUser?.uid)!
+        let startingBid = startingBidField.text!
+        let itemName = nameItemField.text!
+        let condition = conditionLabel.text!
+        let description = descriptionTextView.text!
+        let itemRef = ref.child("items").childByAutoId()
+        itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: userID), "bid": String(describing: startingBid), "description": String(describing: description), "images": imgStore])
+        self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+        self.endLoading(vc: self, dismissVC: true)
+    }
+    
+    func imageToBase64(image: UIImage) -> String {
+        let imageData = UIImagePNGRepresentation(image)
+        let base64String = imageData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        return base64String!
+    }
     /*
     // MARK: - Navigation
 

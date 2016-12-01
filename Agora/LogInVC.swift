@@ -61,10 +61,10 @@ class LogInVC: UIViewController {
             self.beginLoading()
             FIRAuth.auth()?.signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
                 if error == nil {
-                    self.endLoading()
+                    self.endLoading(vc: self, dismissVC: false)
                     self.performSegue(withIdentifier: "toIntroVC", sender: self)
                 } else {
-                    self.endLoading()
+                    self.endLoading(vc: self, dismissVC: false)
                     let errText = (error?.localizedDescription)!
                     print(error)
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
@@ -118,8 +118,12 @@ public extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func endLoading() {
-        dismiss(animated: false, completion: nil)
+    func endLoading(vc: UIViewController, dismissVC: Bool) {
+        dismiss(animated: false, completion: {
+            if dismissVC {
+                vc.dismiss(animated: true, completion: nil)
+            }
+        })
     }
 }
 
