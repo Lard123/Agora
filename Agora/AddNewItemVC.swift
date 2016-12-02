@@ -8,8 +8,9 @@
 
 import UIKit
 import ImagePicker
-import FirebaseDatabase
 import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 
 class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -26,6 +27,8 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     var itemImages = [UIImage]()
     
     var ref: FIRDatabaseReference!
+    
+    var userID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,21 +120,48 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     }
     
     @IBAction func submitItem(_ sender: AnyObject) {
-        print("pass")
         self.beginLoading()
-        var imgStore = Dictionary<String, Any>()
-        for (ind, img) in itemImages.enumerated() {
-            imgStore["image\(ind + 1)"] = imageToBase64(image: UIImage(data: UIImageJPEGRepresentation(img, 0.5)!)!)
-        }
-        let userID = (FIRAuth.auth()?.currentUser?.uid)!
         let startingBid = startingBidField.text!
         let itemName = nameItemField.text!
-        let condition = conditionLabel.text!
+        let condition = conditionLabel.text!.replacingOccurrences(of: "Selected Condition: ", with: "")
         let description = descriptionTextView.text!
         let itemRef = ref.child("items").childByAutoId()
-        itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: userID), "bid": String(describing: startingBid), "description": String(describing: description), "images": imgStore])
-        self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
-        self.endLoading(vc: self, dismissVC: true)
+        let userID = (FIRAuth.auth()?.currentUser?.uid)!
+        print("Item images")
+        print(itemImages)
+        self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            print("connected")
+            if let userDict = snapshot.value as? [String : AnyObject] {
+                let name = userDict["name"] as! String
+                itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "images": self.imagesToURLs(images: [self.itemImages[0]])])
+                self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+                self.endLoading(vc: self, dismissVC: true)
+            }
+        })
+    }
+    
+    func imagesToURLs(images: [UIImage]) -> [String:String] {
+        var imgURLs = [String:String]()
+        for (index, img) in images.enumerated() {
+            let imageName = NSUUID().uuidString
+            let storageRef = FIRStorage.storage().reference().child("Items").child("\(imageName).png")
+            if let uploadData = UIImagePNGRepresentation(img) {
+                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                    print("check")
+                    if error != nil {
+                        print(error)
+                    } else {
+                        if let imageUrl = metadata?.downloadURL()?.absoluteString {
+                            imgURLs["image\(index + 1)"] = imageUrl
+                            print("done")
+                            print(imgURLs)
+                        }
+                    }
+                })
+            }
+        }
+        print(imgURLs)
+        return imgURLs
     }
     
     func imageToBase64(image: UIImage) -> String {

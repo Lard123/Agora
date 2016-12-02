@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -21,8 +22,6 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var nameLabel: UITextField!
     
     var ref: FIRDatabaseReference!
-    
-    var isSave = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +37,7 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     @IBAction func makeNewAccount(_ sender: AnyObject) {
+        self.beginLoading()
         let email = emailLabel.text!
         let password = passwordLabel.text!
         let phone = phoneLabel.text!
@@ -64,8 +64,19 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         } else {
             FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
                 if error == nil {
-                    self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": self.imageToBase64(image: self.imageView.image!)])
-                    self.performSegue(withIdentifier: "unwindToLogin", sender: self)
+                    let imageName = NSUUID().uuidString
+                    let storageRef = FIRStorage.storage().reference().child("Profiles").child("\(imageName).png")
+                    if let uploadData = UIImagePNGRepresentation(self.imageView.image!) {
+                        storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                            if error != nil {
+                                print(error)
+                            } else {
+                                if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
+                                    self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": profileImageUrl])
+                                }
+                            }
+                        })
+                    }
                 } else {
                     let errText = (error?.localizedDescription)!
                     print(error)
@@ -76,6 +87,7 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     }
                 }
             }
+            self.endLoading(vc: self, dismissVC: true)
         }
     }
     

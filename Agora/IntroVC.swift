@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 import FirebaseDatabase
+import FirebaseStorage
 
 class IntroVC: UIViewController, MKMapViewDelegate {
 
@@ -26,9 +27,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
             // Get user value
             let value = snapshot.value as? NSDictionary
             let pic = value?["image"] as! String
-            print(pic)
-            let img = self.base64ToImage(base64String: pic)
-            self.backgroundImage.image = img
+            self.backgroundImage.loadImageUsingCacheWithUrlString(urlString: pic)
             // ...
         }) { (error) in
             print(error.localizedDescription)
@@ -105,4 +104,8 @@ class IntroVC: UIViewController, MKMapViewDelegate {
 
 class CustomPointAnnotation: MKPointAnnotation {
     var imageName: String!
+}
+
+extension UIImage {
+    
 }

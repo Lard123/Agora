@@ -12,21 +12,19 @@ import UIKit
 class Item: NSObject {
     var name: String = ""
     var condition: String = ""
-    var owner: String = ""
+    var seller: String = ""
+    var sellerID: String = ""
+    var descrip: String = ""
     var cost: Double = 0
-    var image = UIImage()
+    var images = [UIImage]()
     
-    init(name: String, condition: String, owner: String, image: UIImage, cost: Double) {
+    init(name: String, condition: String, seller: String, images: [UIImage], cost: Double, sellerID: String, description: String) {
         self.name = name
         self.condition = condition
-        self.owner = owner
-        self.image = image
+        self.seller = seller
+        self.images = images
         self.cost = cost
-    }
-    
-    func getImageHeight() -> CGFloat {
-        let heightInPoints = image.size.height
-        let heightInPixels = heightInPoints * image.scale
-        return heightInPixels
+        self.sellerID = sellerID
+        self.descrip = description
     }
 }

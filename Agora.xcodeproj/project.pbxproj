@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20CF9631DF1103000E3081A /* FirebaseStorage.framework */; };
+		E20CF9661DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */; };
 		E22BC6791DE50DED00A34C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BC6781DE50DED00A34C59 /* AppDelegate.swift */; };
 		E22BC67B1DE50DED00A34C59 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BC67A1DE50DED00A34C59 /* LogInVC.swift */; };
 		E22BC67E1DE50DED00A34C59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22BC67C1DE50DED00A34C59 /* Main.storyboard */; };
@@ -52,6 +54,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E20CF9611DF1102200E3081A /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = ../../../../Downloads/Firebase/Storage/FirebaseStorage.framework; sourceTree = "<group>"; };
+		E20CF9631DF1103000E3081A /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = ../../../../../Downloads/Firebase/Storage/FirebaseStorage.framework; sourceTree = "<group>"; };
+		E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUIImageCacheExtension.swift; sourceTree = "<group>"; };
 		E22BC6751DE50DED00A34C59 /* Agora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E22BC6781DE50DED00A34C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E22BC67A1DE50DED00A34C59 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
@@ -99,6 +104,7 @@
 				E296A0E31DE7738C00007AC1 /* FirebaseInstanceID.framework in Frameworks */,
 				E296A0E51DE7738C00007AC1 /* GoogleSymbolUtilities.framework in Frameworks */,
 				E296A0E41DE7738C00007AC1 /* GoogleInterchangeUtilities.framework in Frameworks */,
+				E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */,
 				E296A0E61DE7738C00007AC1 /* GoogleToolboxForMac.framework in Frameworks */,
 				E296A0D81DE772C100007AC1 /* FirebaseAuth.framework in Frameworks */,
 				E296A0E11DE7738C00007AC1 /* FirebaseAnalytics.framework in Frameworks */,
@@ -108,11 +114,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20CF9601DF1102100E3081A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E20CF9611DF1102200E3081A /* FirebaseStorage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E22BC66C1DE50DED00A34C59 = {
 			isa = PBXGroup;
 			children = (
 				E22BC6771DE50DED00A34C59 /* Agora */,
 				E22BC6761DE50DED00A34C59 /* Products */,
+				E20CF9601DF1102100E3081A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +161,7 @@
 			children = (
 				E296A0D21DE7727F00007AC1 /* Firebase.h */,
 				E296A0D31DE7728500007AC1 /* module.modulemap */,
+				E20CF9631DF1103000E3081A /* FirebaseStorage.framework */,
 				E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */,
 				E296A0DB1DE7738C00007AC1 /* FirebaseAnalytics.framework */,
 				E296A0DC1DE7738C00007AC1 /* FirebaseCore.framework */,
@@ -195,6 +211,7 @@
 			children = (
 				E267D2C01DE6A989003B3F00 /* Item.swift */,
 				E22BC6781DE50DED00A34C59 /* AppDelegate.swift */,
+				E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -297,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */,
+				E20CF9661DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift in Sources */,
 				E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */,
 				E267D2C11DE6A989003B3F00 /* Item.swift in Sources */,
 				E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */,

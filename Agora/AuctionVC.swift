@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -14,12 +16,15 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     var items = [Item]()
     
+    var ref: FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = FIRDatabase.database().reference()
         collectionView.dataSource = self
         collectionView.delegate = self
         self.beginLoading()
-        getData()
+        //getData()
         let screenWidth = UIScreen.main.bounds.size.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -35,26 +40,29 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     }
     
     func getData() {
-        var i = Item(name: "AP Chemistry Textbook", condition: "Pre-owned", owner: "Varun Shenoy", image: #imageLiteral(resourceName: "textbooks"), cost: 33)
-        items.append(i)
-        i = Item(name: "Pair of Winter Gloves", condition: "New with Tags", owner: "Naren Ramesh", image: #imageLiteral(resourceName: "gloves"), cost: 15)
-        items.append(i)
-        i = Item(name: "Bag of Cheetos", condition: "Slightly Used", owner: "Edward Hsu", image: #imageLiteral(resourceName: "cheetos"), cost: 120)
-        items.append(i)
-        i = Item(name: "Diamondback Road Bike", condition: "Pre-owned", owner: "Bhavesh Manivannan", image: #imageLiteral(resourceName: "bike"), cost: 76)
-        items.append(i)
-        i = Item(name: "Nintendo DS Game Cartridges", condition: "Slightly Used", owner: "Shreyas Patankar", image: #imageLiteral(resourceName: "game-pile"), cost: 24)
-        items.append(i)
-        i = Item(name: "AP Chemistry Textbook", condition: "Pre-owned", owner: "Varun Shenoy", image: #imageLiteral(resourceName: "textbooks"), cost: 33)
-        items.append(i)
-        i = Item(name: "Pair of Winter Gloves", condition: "New with Tags", owner: "Naren Ramesh", image: #imageLiteral(resourceName: "gloves"), cost: 15)
-        items.append(i)
-        i = Item(name: "Bag of Cheetos", condition: "Slightly Used", owner: "Edward Hsu", image: #imageLiteral(resourceName: "cheetos"), cost: 120)
-        items.append(i)
-        i = Item(name: "Diamondback Road Bike", condition: "Pre-owned", owner: "Bhavesh Manivannan", image: #imageLiteral(resourceName: "bike"), cost: 76)
-        items.append(i)
-        i = Item(name: "Nintendo DS Game Cartridges", condition: "Slightly Used", owner: "Shreyas Patankar", image: #imageLiteral(resourceName: "game-pile"), cost: 24)
-        items.append(i)
+        ref.child("items").observe(FIRDataEventType.value, with: { (snapshot) in
+            if let json = snapshot.value as? [String : AnyObject] {
+                for dict in json {
+                    if let dict = dict.value as? [String : AnyObject] {
+                        let currentBid = dict["bid"] as! String
+                        let condition = dict["condition"] as! String
+                        let description = dict["description"] as! String
+                        let images = [#imageLiteral(resourceName: "dusty")]//dict["images"] as! [String: String]
+                        let itemName = dict["name"] as! String
+                        let sellerID = dict["sellerID"] as! String
+                        let seller = dict["seller"] as! String
+                        let i = Item(name: itemName, condition: condition, seller: seller, images: images, cost: Double(currentBid)!, sellerID: sellerID, description: description)
+                        self.items.append(i)
+                        /*var imageArray = [UIImage]()
+                        for img in images {
+                            imageArray.append(self.base64ToImage(base64String: img.value))
+                        }*/
+                    }
+                }
+            }
+        })
+        collectionView.reloadData()
+        print(items.count)
         self.endLoading(vc: self, dismissVC: false)
     }
     
@@ -70,6 +78,12 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func base64ToImage(base64String: String) -> UIImage {
+        let decodedData = NSData(base64Encoded: base64String, options: .ignoreUnknownCharacters)
+        let decodedimage = UIImage(data: decodedData as! Data)
+        return decodedimage!
     }
     
     /*

@@ -17,10 +17,10 @@ class ItemCell: UICollectionViewCell {
     @IBOutlet weak var conditionLabel: UILabel!
     
     func setUpCell(obj: Item) {
-        imageView.image = obj.image
+        imageView.image = obj.images[0]
         costLabel.text = NSString(format:"     $%.2f   ", obj.cost) as String
         itemNameLabel.text = obj.name
-        ownerLabel.text = obj.owner
+        ownerLabel.text = obj.seller
         let condition = obj.condition
         if condition == "New with Tags" {
             conditionLabel.textColor = UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00)
