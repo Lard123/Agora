@@ -22,9 +22,11 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var conditionButton: UIButton!
     @IBOutlet weak var conditionLabel: UILabel!
     
     var itemImages = [UIImage]()
+    var imgURLs = [String:String]()
     
     var ref: FIRDatabaseReference!
     
@@ -116,52 +118,63 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.popoverPresentationController?.sourceView = sender as? UIView
+        alert.popoverPresentationController?.sourceRect = sender.bounds
         self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func submitItem(_ sender: AnyObject) {
-        self.beginLoading()
-        let startingBid = startingBidField.text!
+        //self.beginLoading()
+        let startingBid = NSString(format:"%.2f", Double(startingBidField.text!)!) as String
         let itemName = nameItemField.text!
         let condition = conditionLabel.text!.replacingOccurrences(of: "Selected Condition: ", with: "")
         let description = descriptionTextView.text!
         let itemRef = ref.child("items").childByAutoId()
         let userID = (FIRAuth.auth()?.currentUser?.uid)!
-        print("Item images")
-        print(itemImages)
-        self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-            print("connected")
-            if let userDict = snapshot.value as? [String : AnyObject] {
-                let name = userDict["name"] as! String
-                itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "images": self.imagesToURLs(images: [self.itemImages[0]])])
-                self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
-                self.endLoading(vc: self, dismissVC: true)
-            }
-        })
+        imagesToURLs { (bool) in
+            self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                print("connected")
+                if let userDict = snapshot.value as? [String : AnyObject] {
+                    let name = userDict["name"] as! String
+                    itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "images": self.imgURLs])
+                    print("urls")
+                    print(self.imgURLs)
+                    self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+                    self.performSegue(withIdentifier: "unwind", sender: self)
+                }
+            })
+        }
     }
     
-    func imagesToURLs(images: [UIImage]) -> [String:String] {
-        var imgURLs = [String:String]()
-        for (index, img) in images.enumerated() {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //self.endLoading(vc: self, dismissVC: false)
+        if (segue.identifier == "unwind") {
+            let auction = segue.destination as! AuctionVC
+            auction.loadedOnce = false
+        }
+    }
+    
+    func imagesToURLs(completionHandler:@escaping (Bool) -> ()) {
+        for (index, img) in itemImages.enumerated() {
             let imageName = NSUUID().uuidString
-            let storageRef = FIRStorage.storage().reference().child("Items").child("\(imageName).png")
-            if let uploadData = UIImagePNGRepresentation(img) {
-                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
-                    print("check")
-                    if error != nil {
-                        print(error)
-                    } else {
-                        if let imageUrl = metadata?.downloadURL()?.absoluteString {
-                            imgURLs["image\(index + 1)"] = imageUrl
-                            print("done")
-                            print(imgURLs)
+            let storageRef = FIRStorage.storage().reference().child("Items").child("\(imageName).jpg")
+            let uploadData = UIImageJPEGRepresentation(img, 0.5)
+            storageRef.put(uploadData!, metadata: nil, completion: { (metadata, error) in
+                print("check")
+                if error != nil {
+                    print(error)
+                } else {
+                    if let imageUrl = metadata?.downloadURL()?.absoluteString {
+                        self.imgURLs["image\(index + 1)"] = imageUrl
+                        if index == self.itemImages.count - 1 {
+                            completionHandler(true)
                         }
                     }
-                })
-            }
+                }
+            })
+            print("wubalubadubdub")
+            print(imgURLs)
         }
-        print(imgURLs)
-        return imgURLs
     }
     
     func imageToBase64(image: UIImage) -> String {

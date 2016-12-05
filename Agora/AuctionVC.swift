@@ -18,20 +18,33 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     var ref: FIRDatabaseReference!
     
+    var loadedOnce = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = FIRDatabase.database().reference()
         collectionView.dataSource = self
         collectionView.delegate = self
-        self.beginLoading()
-        //getData()
+        // Do any additional setup after loading the view.
         let screenWidth = UIScreen.main.bounds.size.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: (screenWidth - 30)/2, height: 200)
         collectionView!.collectionViewLayout = layout
         collectionView!.backgroundColor = UIColor.clear
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !loadedOnce {
+            self.beginLoading()
+            getData()
+            collectionView.alpha = 0
+            //self.collectionView.reloadData()  
+            UIView.animate(withDuration: 1, animations: {
+                self.collectionView.alpha = 1
+            })
+            loadedOnce = true
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,32 +53,32 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     }
     
     func getData() {
-        ref.child("items").observe(FIRDataEventType.value, with: { (snapshot) in
+        ref.child("items").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.items = []
+            //self.beginLoading()
             if let json = snapshot.value as? [String : AnyObject] {
                 for dict in json {
                     if let dict = dict.value as? [String : AnyObject] {
+                        print(dict)
                         let currentBid = dict["bid"] as! String
                         let condition = dict["condition"] as! String
                         let description = dict["description"] as! String
-                        let images = [#imageLiteral(resourceName: "dusty")]//dict["images"] as! [String: String]
+                        let imageArray = dict["images"] as! [String: String]
+                        let images = imageArray.values.reversed()
+                        print(images)
                         let itemName = dict["name"] as! String
                         let sellerID = dict["sellerID"] as! String
                         let seller = dict["seller"] as! String
-                        let i = Item(name: itemName, condition: condition, seller: seller, images: images, cost: Double(currentBid)!, sellerID: sellerID, description: description)
+                        let i = Item(name: itemName, condition: condition, seller: seller, imageURLs: images, cost: Double(currentBid)!, sellerID: sellerID, description: description)
                         self.items.append(i)
-                        /*var imageArray = [UIImage]()
-                        for img in images {
-                            imageArray.append(self.base64ToImage(base64String: img.value))
-                        }*/
                     }
                 }
             }
+            self.endLoading(vc: self, dismissVC: false)
+            print(self.items.count)
+            self.collectionView.reloadData()
         })
-        collectionView.reloadData()
-        print(items.count)
-        self.endLoading(vc: self, dismissVC: false)
     }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }

@@ -10,14 +10,16 @@ import UIKit
 
 class ItemCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var conditionLabel: UILabel!
     
     func setUpCell(obj: Item) {
-        imageView.image = obj.images[0]
+        spinner.startAnimating()
+        imageView.loadImageUsingUrlString(urlString: obj.imageURLs[0])
         costLabel.text = NSString(format:"     $%.2f   ", obj.cost) as String
         itemNameLabel.text = obj.name
         ownerLabel.text = obj.seller

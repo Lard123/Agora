@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import SwiftMessages
 
 class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -37,42 +38,44 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     @IBAction func makeNewAccount(_ sender: AnyObject) {
-        self.beginLoading()
         let email = emailLabel.text!
         let password = passwordLabel.text!
         let phone = phoneLabel.text!
         let name = nameLabel.text!
         let reenterPassword = reenterPasswordLabel.text!
         if name == "" {
-            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a name.")
+            self.showSignupError(text: "Please enter a name.", headerText: "Sign Up Error")
             nameLabel.attributedPlaceholder = NSAttributedString(string:"Full Name",
                                                                   attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if email == "" {
-            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter an email.")
+            self.showSignupError(text: "Please enter an email.", headerText: "Sign Up Error")
             emailLabel.attributedPlaceholder = NSAttributedString(string:"Email",
                                                                  attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if phone == "" {
-            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a phone number.")
+            self.showSignupError(text: "Please enter a phone number.", headerText: "Sign Up Error")
             phoneLabel.attributedPlaceholder = NSAttributedString(string:"Phone Number",
                                                                   attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if password == "" {
-            SCLAlertView().showError("Sign Up Error", subTitle: "Please enter a password")
+            self.showSignupError(text: "Please enter a password.", headerText: "Sign Up Error")
             passwordLabel.attributedPlaceholder = NSAttributedString(string:"Password",
                                                                   attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if password != reenterPassword {
-            SCLAlertView().showError("Password Mismatch", subTitle: "Entered passwords do not match.")
+            self.showSignupError(text: "Entered passwords do not match.", headerText: "Password Mismatch")
         } else {
+            self.beginLoading()
             FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
                 if error == nil {
                     let imageName = NSUUID().uuidString
-                    let storageRef = FIRStorage.storage().reference().child("Profiles").child("\(imageName).png")
-                    if let uploadData = UIImagePNGRepresentation(self.imageView.image!) {
+                    let storageRef = FIRStorage.storage().reference().child("Profiles").child("\(imageName).jpg")
+                    //TODO: Check if avatar is nil
+                    if let uploadData = UIImageJPEGRepresentation(self.imageView.image!, 0.5) {
                         storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
                             if error != nil {
                                 print(error)
                             } else {
                                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                                     self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": profileImageUrl])
+                                    self.endLoading(vc: self, dismissVC: true)
                                 }
                             }
                         })
@@ -81,14 +84,32 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     let errText = (error?.localizedDescription)!
                     print(error)
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
-                        SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+                        self.showSignupError(text:"Check for errors in your entries.", headerText: "Form has been filled out incorrectly.")
                     } else {
-                        SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                        self.showSignupError(text: (error?.localizedDescription)!, headerText: "Signup Error")
                     }
                 }
             }
-            self.endLoading(vc: self, dismissVC: true)
         }
+    }
+    
+    func showSignupError(text: String, headerText: String) {
+        let view = MessageView.viewFromNib(layout: .CardView)
+        view.button?.removeFromSuperview()
+        
+        // Theme message elements with the warning style.
+        view.configureTheme(.error)
+        
+        // Add a drop shadow.
+        view.configureDropShadow()
+        
+        // Set message title, body, and icon. Here, we're overriding the default warning
+        // image with an emoji character.
+        view.configureContent(title: headerText, body: text)
+        
+        // Show the message.
+        SwiftMessages.show(view: view)
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

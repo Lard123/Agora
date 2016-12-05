@@ -10,9 +10,11 @@ import UIKit
 import AVKit
 import AVFoundation
 import Firebase
+import SwiftMessages
 
 class LogInVC: UIViewController {
 
+    @IBOutlet weak var container: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -50,11 +52,11 @@ class LogInVC: UIViewController {
         let email = usernameField.text!
         let password = passwordField.text!
         if email == "" {
-            SCLAlertView().showError("Login Error", subTitle: "Please enter an email.")
+            self.showLoginError(text: "Please enter an email.")
             usernameField.attributedPlaceholder = NSAttributedString(string:"EMAIL",
                                                                   attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if password == "" {
-            SCLAlertView().showError("Login Error", subTitle: "Please enter an password.")
+            self.showLoginError(text: "Please enter a password.")
             passwordField.attributedPlaceholder = NSAttributedString(string:"PASSWORD",
                                                                      attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else {
@@ -68,13 +70,32 @@ class LogInVC: UIViewController {
                     let errText = (error?.localizedDescription)!
                     print(error)
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
-                        SCLAlertView().showError("Form has been filled out incorrectly.", subTitle: "Check for errors in your entries.")
+                        self.showLoginError(text: "The form has been filled out incorrectly. Check for errors.")
                     } else {
-                        SCLAlertView().showError((error?.localizedDescription)!, subTitle: "Try again.")
+                        self.showLoginError(text: (error?.localizedDescription)!)
                     }
                 }
             }
         }
+    }
+    
+    func showLoginError(text: String) {
+        let view = MessageView.viewFromNib(layout: .CardView)
+        view.button?.removeFromSuperview()
+        
+        // Theme message elements with the warning style.
+        view.configureTheme(.error)
+        
+        // Add a drop shadow.
+        view.configureDropShadow()
+        
+        // Set message title, body, and icon. Here, we're overriding the default warning
+        // image with an emoji character.
+        view.configureContent(title: "Login Error", body: text)
+        
+        // Show the message.
+        SwiftMessages.show(view: view)
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

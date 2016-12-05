@@ -22,7 +22,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ9-iN-hXL">
@@ -205,6 +205,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="container" destination="WZ9-iN-hXL" id="fUj-Et-5t6"/>
                         <outlet property="passwordField" destination="xTO-iw-C90" id="tcb-pf-2fZ"/>
                         <outlet property="usernameField" destination="Kcp-pO-jsL" id="aq5-N7-qUv"/>
                         <segue destination="4lx-kP-v0v" kind="presentation" identifier="toIntroVC" id="7rB-JC-Zl5"/>
@@ -223,7 +224,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hUV-Pk-0JI"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="wew" id="qpw-jO-nWp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i8N-L7-OzY" customClass="TPKeyboardAvoidingScrollView">
@@ -434,7 +435,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GaX-0s-08U"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tAQ-Jy-V4S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CupertinoHSStudentUnionQuad_850w" translatesAutoresizingMaskIntoConstraints="NO" id="GMU-eZ-yhX">
@@ -540,7 +541,8 @@
                                             <action selector="goToCupertinoHigh:" destination="4lx-kP-v0v" eventType="touchUpInside" id="JNs-rj-Sh5"/>
                                         </connections>
                                     </button>
-                                    <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9iR-IR-lle">
+                                    <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9iR-IR-lle">
+                                        <frame key="frameInset" width="1000" height="1000"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="163" id="wFQ-Le-bEt"/>
                                         </constraints>
@@ -640,7 +642,7 @@
                         <viewControllerLayoutGuide type="bottom" id="0Zs-Bb-maQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="o1e-PN-ek9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CupertinoHSStudentUnionQuad_850w" translatesAutoresizingMaskIntoConstraints="NO" id="pEH-mP-wlg">
@@ -665,7 +667,7 @@
                                         </constraints>
                                         <state key="normal" image="Delete-50"/>
                                         <connections>
-                                            <segue destination="J3f-Rd-Qzv" kind="unwind" unwindAction="unwindToViewController:" id="oJv-ZE-s2Z"/>
+                                            <segue destination="J3f-Rd-Qzv" kind="unwind" identifier="" unwindAction="unwindToViewController:" id="oJv-ZE-s2Z"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -794,14 +796,6 @@
                                             <action selector="itemConditionTapped:" destination="0gi-Ga-ii9" eventType="touchUpInside" id="iqX-Ox-0DQ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Condition: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61t-H7-EyS">
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="vzM-UB-smz"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" red="0.29522660340314144" green="0.29522660340314144" blue="0.29522660340314144" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBb-lg-2KY">
                                         <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -820,6 +814,14 @@
                                             <action selector="submitItem:" destination="0gi-Ga-ii9" eventType="touchUpInside" id="ga3-Tr-ima"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Condition: None" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61t-H7-EyS">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="vzM-UB-smz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Italic" family="Avenir Next" pointSize="15"/>
+                                        <color key="textColor" red="0.29522660340314144" green="0.29522660340314144" blue="0.29522660340314144" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="a06-7B-xsX" secondAttribute="trailing" id="0hU-B7-OUT"/>
@@ -844,14 +846,14 @@
                                     <constraint firstAttribute="trailing" secondItem="pBb-lg-2KY" secondAttribute="trailing" constant="16" id="efM-co-zq8"/>
                                     <constraint firstItem="ndK-Xm-OfL" firstAttribute="leading" secondItem="TQ3-pv-9i9" secondAttribute="leading" constant="18" id="ey2-BU-L8n"/>
                                     <constraint firstItem="Jyo-5Z-LCD" firstAttribute="leading" secondItem="VfZ-PR-5Ik" secondAttribute="leading" id="f0T-eh-gVJ"/>
-                                    <constraint firstItem="pBb-lg-2KY" firstAttribute="top" secondItem="61t-H7-EyS" secondAttribute="bottom" constant="11" id="fWr-9x-5ZC"/>
+                                    <constraint firstItem="pBb-lg-2KY" firstAttribute="top" secondItem="61t-H7-EyS" secondAttribute="bottom" id="fWr-9x-5ZC"/>
                                     <constraint firstItem="rcc-i0-910" firstAttribute="leading" secondItem="0Vv-fm-k8W" secondAttribute="leading" id="g9K-bP-6fQ"/>
                                     <constraint firstAttribute="bottom" secondItem="pBb-lg-2KY" secondAttribute="bottom" constant="99" id="kbP-OZ-70q"/>
                                     <constraint firstItem="pBb-lg-2KY" firstAttribute="leading" secondItem="TQ3-pv-9i9" secondAttribute="leading" constant="18" id="kgg-uw-xk2"/>
                                     <constraint firstItem="ndK-Xm-OfL" firstAttribute="leading" secondItem="rnm-Rk-NKn" secondAttribute="leading" id="m2x-nX-wOu"/>
                                     <constraint firstItem="rcc-i0-910" firstAttribute="leading" secondItem="TQ3-pv-9i9" secondAttribute="leading" constant="16" id="mYd-RK-xDS"/>
                                     <constraint firstItem="a06-7B-xsX" firstAttribute="leading" secondItem="TQ3-pv-9i9" secondAttribute="leading" constant="2" id="nQ3-LY-bKR"/>
-                                    <constraint firstItem="61t-H7-EyS" firstAttribute="top" secondItem="Jyo-5Z-LCD" secondAttribute="bottom" constant="5" id="tdS-Od-YVG"/>
+                                    <constraint firstItem="61t-H7-EyS" firstAttribute="top" secondItem="Jyo-5Z-LCD" secondAttribute="bottom" id="tdS-Od-YVG"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -871,16 +873,18 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="a06-7B-xsX" id="bFk-n9-xRV"/>
+                        <outlet property="conditionButton" destination="Jyo-5Z-LCD" id="GbJ-ji-6eV"/>
                         <outlet property="conditionLabel" destination="61t-H7-EyS" id="Bqm-SR-4Jx"/>
                         <outlet property="descriptionTextView" destination="VfZ-PR-5Ik" id="LCx-oJ-VUa"/>
                         <outlet property="nameItemField" destination="rnm-Rk-NKn" id="4Mm-Nk-PAP"/>
                         <outlet property="startingBidField" destination="GHa-ER-IMz" id="G9a-og-7e4"/>
+                        <segue destination="J3f-Rd-Qzv" kind="unwind" identifier="unwind" unwindAction="unwindToViewController:" id="IFk-zg-Q75"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44M-Nk-Y4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="J3f-Rd-Qzv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1766" y="-555"/>
+            <point key="canvasLocation" x="1765.5999999999999" y="-555.47226386806597"/>
         </scene>
         <!--AuctionVC-->
         <scene sceneID="aCS-Yt-S4t">
@@ -891,7 +895,7 @@
                         <viewControllerLayoutGuide type="bottom" id="vPa-Mm-AgQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mbj-WK-cvZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CupertinoHSStudentUnionQuad_850w" translatesAutoresizingMaskIntoConstraints="NO" id="odT-0t-O1S">
@@ -938,7 +942,7 @@
                                     <constraint firstAttribute="bottom" secondItem="IwE-bj-QDL" secondAttribute="bottom" constant="12" id="rHe-C7-5Hn"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="r5Q-Ti-G8X">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5Q-Ti-G8X">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rAV-b1-XoG">
                                     <size key="itemSize" width="50" height="50"/>
@@ -948,7 +952,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="itemCell" id="M4O-nc-3Yf" userLabel="ItemCell" customClass="ItemCell" customModule="Agora" customModuleProvider="target">
-                                        <rect key="frame" x="70" y="0.0" width="180" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="200"/>
@@ -956,7 +960,10 @@
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="C9t-M2-1JL">
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textbooks" translatesAutoresizingMaskIntoConstraints="NO" id="Naf-Ve-RIB">
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="f5B-gJ-osp">
+                                                            <color key="color" red="0.0" green="0.69411764710000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </activityIndicatorView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textbooks" translatesAutoresizingMaskIntoConstraints="NO" id="Naf-Ve-RIB" customClass="CustomImageView" customModule="Agora" customModuleProvider="target">
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="120" id="0zO-Pw-WGh"/>
                                                             </constraints>
@@ -994,11 +1001,13 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="f5B-gJ-osp" firstAttribute="centerY" secondItem="C9t-M2-1JL" secondAttribute="centerY" constant="-39" id="2QE-xk-eGP"/>
                                                         <constraint firstItem="Naf-Ve-RIB" firstAttribute="top" secondItem="C9t-M2-1JL" secondAttribute="top" id="3D7-2P-8fR"/>
                                                         <constraint firstItem="UFh-kq-mu3" firstAttribute="leading" secondItem="C9t-M2-1JL" secondAttribute="leading" constant="8" id="8wZ-mi-Icn"/>
                                                         <constraint firstItem="SAA-ST-qLy" firstAttribute="leading" secondItem="C9t-M2-1JL" secondAttribute="leading" constant="8" id="LDt-VI-Pby"/>
                                                         <constraint firstAttribute="trailing" secondItem="UFh-kq-mu3" secondAttribute="trailing" constant="8" id="MGR-pm-OLG"/>
                                                         <constraint firstItem="YS8-5N-Ltq" firstAttribute="leading" secondItem="C9t-M2-1JL" secondAttribute="leading" constant="8" id="NJX-p5-Rhv"/>
+                                                        <constraint firstItem="f5B-gJ-osp" firstAttribute="centerX" secondItem="C9t-M2-1JL" secondAttribute="centerX" constant="1" id="Puf-dW-juv"/>
                                                         <constraint firstItem="YS8-5N-Ltq" firstAttribute="top" secondItem="7fy-ml-vOK" secondAttribute="bottom" constant="1" id="Pvh-Ih-dOP"/>
                                                         <constraint firstAttribute="trailing" secondItem="Naf-Ve-RIB" secondAttribute="trailing" id="V21-tg-aos"/>
                                                         <constraint firstAttribute="trailing" secondItem="YS8-5N-Ltq" secondAttribute="trailing" constant="8" id="W5U-bg-xGF"/>
@@ -1030,6 +1039,7 @@
                                             <outlet property="imageView" destination="Naf-Ve-RIB" id="ODR-fU-vpv"/>
                                             <outlet property="itemNameLabel" destination="YS8-5N-Ltq" id="aN6-x8-vdu"/>
                                             <outlet property="ownerLabel" destination="UFh-kq-mu3" id="pg7-nk-RKG"/>
+                                            <outlet property="spinner" destination="f5B-gJ-osp" id="tSG-G4-XjO"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1056,7 +1066,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F6r-uz-9pB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lce-ua-7fu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1764" y="135"/>
+            <point key="canvasLocation" x="1703" y="135"/>
         </scene>
     </scenes>
     <resources>
@@ -1074,6 +1084,6 @@
         <image name="userSettings" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CeM-Nu-OVM"/>
+        <segue reference="kXm-rz-5d5"/>
     </inferredMetricsTieBreakers>
 </document>

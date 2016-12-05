@@ -21,7 +21,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
     var school = CustomPointAnnotation()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = FIRDatabase.database().reference()
+        /*let ref = FIRDatabase.database().reference()
         let userID = FIRAuth.auth()?.currentUser?.uid
         ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -31,7 +31,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
             // ...
         }) { (error) in
             print(error.localizedDescription)
-        }
+        }*/
         targetMeter.setProgress(0, animated: false)
         targetMeter.setProgress(0.5, animated: true)
         mapView.delegate = self
@@ -106,6 +106,3 @@ class CustomPointAnnotation: MKPointAnnotation {
     var imageName: String!
 }
 
-extension UIImage {
-    
-}
