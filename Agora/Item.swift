@@ -12,19 +12,17 @@ import UIKit
 class Item: NSObject {
     var name: String = ""
     var condition: String = ""
-    var seller: String = ""
-    var sellerID: String = ""
     var descrip: String = ""
     var cost: Double = 0
     var imageURLs = [String]()
+    var seller: User!
     
-    init(name: String, condition: String, seller: String, imageURLs: [String], cost: Double, sellerID: String, description: String) {
+    init(name: String, condition: String, seller: User, imageURLs: [String], cost: Double, description: String) {
         self.name = name
         self.condition = condition
         self.seller = seller
         self.imageURLs = imageURLs
         self.cost = cost
-        self.sellerID = sellerID
         self.descrip = description
     }
 }

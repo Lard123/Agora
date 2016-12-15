@@ -61,6 +61,8 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                                                                   attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if password != reenterPassword {
             self.showSignupError(text: "Entered passwords do not match.", headerText: "Password Mismatch")
+        } else if imageView.image == nil{
+            imageView.image = #imageLiteral(resourceName: "default_profile")
         } else {
             self.beginLoading()
             FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
@@ -76,6 +78,14 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                                     self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": profileImageUrl])
                                     self.endLoading(vc: self, dismissVC: true)
+                                    let view = MessageView.viewFromNib(layout: .StatusLine)
+                                    view.button?.removeFromSuperview()
+                                    view.configureTheme(Theme.success)
+                                    var config = SwiftMessages.Config()
+                                    config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+                                    view.configureContent(title: "Success!", body: "Successfully signed up!")
+                                    view.configureTheme(backgroundColor: UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00), foregroundColor: UIColor.white)
+                                    SwiftMessages.show(config: config, view: view)
                                 }
                             }
                         })

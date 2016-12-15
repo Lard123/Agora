@@ -9,11 +9,18 @@
 /* Begin PBXBuildFile section */
 		E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20CF9631DF1103000E3081A /* FirebaseStorage.framework */; };
 		E20CF9661DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */; };
+		E229F6841E00C8620014FF81 /* ItemCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229F6831E00C8620014FF81 /* ItemCarouselCell.swift */; };
+		E229F6881E00CE340014FF81 /* ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229F6871E00CE340014FF81 /* ItemVC.swift */; };
+		E229F68A1E00DF7E0014FF81 /* RefreshContents.xib in Resources */ = {isa = PBXBuildFile; fileRef = E229F6891E00DF7E0014FF81 /* RefreshContents.xib */; };
+		E229F6901E00E4460014FF81 /* SwiftGif.swift in Sources */ = {isa = PBXBuildFile; fileRef = E229F68F1E00E4450014FF81 /* SwiftGif.swift */; };
+		E229F6921E00E4920014FF81 /* cube.gif in Resources */ = {isa = PBXBuildFile; fileRef = E229F6911E00E4920014FF81 /* cube.gif */; };
 		E22BC6791DE50DED00A34C59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BC6781DE50DED00A34C59 /* AppDelegate.swift */; };
 		E22BC67B1DE50DED00A34C59 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22BC67A1DE50DED00A34C59 /* LogInVC.swift */; };
 		E22BC67E1DE50DED00A34C59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22BC67C1DE50DED00A34C59 /* Main.storyboard */; };
 		E22BC6831DE50DED00A34C59 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22BC6811DE50DED00A34C59 /* LaunchScreen.storyboard */; };
 		E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23152521DEBAD3800797269 /* AddNewItemVC.swift */; };
+		E24E3EEA1E023194006F0276 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E3EE91E023194006F0276 /* User.swift */; };
+		E24E3EEC1E0233B3006F0276 /* SellerInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */; };
 		E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; };
 		E25A625B1DF4D02B00F22E40 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; };
 		E25A625C1DF4D02B00F22E40 /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -32,10 +39,11 @@
 		E296A0E81DE7743600007AC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E296A0E71DE7743600007AC1 /* GoogleService-Info.plist */; };
 		E296A0EC1DE77B1300007AC1 /* NewAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A0EB1DE77B1300007AC1 /* NewAccountVC.swift */; };
 		E296A0EE1DE785A400007AC1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; };
-		E296A0FC1DE78B4F00007AC1 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FA1DE78B4F00007AC1 /* SCLAlertView.swift */; };
-		E296A0FD1DE78B4F00007AC1 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FB1DE78B4F00007AC1 /* SCLExtensions.swift */; };
 		E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */; };
 		E296A1031DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		E29F885D1E021466000C1F21 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885C1E021466000C1F21 /* ActionCell.swift */; };
+		E29F885F1E021774000C1F21 /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885E1E021774000C1F21 /* BubbleTransition.swift */; };
+		E2CFE41A1E01D4D30000F4FF /* ItemInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */; };
 		E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */; };
 		E2EA794E1DEBDE4F007128E2 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; };
 		E2EA794F1DEBDE4F007128E2 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -61,6 +69,11 @@
 		E20CF9611DF1102200E3081A /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = ../../../../Downloads/Firebase/Storage/FirebaseStorage.framework; sourceTree = "<group>"; };
 		E20CF9631DF1103000E3081A /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseStorage.framework; path = ../../../../../Downloads/Firebase/Storage/FirebaseStorage.framework; sourceTree = "<group>"; };
 		E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUIImageCacheExtension.swift; sourceTree = "<group>"; };
+		E229F6831E00C8620014FF81 /* ItemCarouselCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCarouselCell.swift; sourceTree = "<group>"; };
+		E229F6871E00CE340014FF81 /* ItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemVC.swift; sourceTree = "<group>"; };
+		E229F6891E00DF7E0014FF81 /* RefreshContents.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefreshContents.xib; sourceTree = "<group>"; };
+		E229F68F1E00E4450014FF81 /* SwiftGif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftGif.swift; sourceTree = "<group>"; };
+		E229F6911E00E4920014FF81 /* cube.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cube.gif; sourceTree = "<group>"; };
 		E22BC6751DE50DED00A34C59 /* Agora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Agora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E22BC6781DE50DED00A34C59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E22BC67A1DE50DED00A34C59 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
@@ -68,6 +81,8 @@
 		E22BC6821DE50DED00A34C59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E22BC6841DE50DED00A34C59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E23152521DEBAD3800797269 /* AddNewItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewItemVC.swift; sourceTree = "<group>"; };
+		E24E3EE91E023194006F0276 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerInfoCell.swift; sourceTree = "<group>"; };
 		E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftMessages.framework; sourceTree = "<group>"; };
 		E267D2B61DE67DF3003B3F00 /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E267D2B81DE68D92003B3F00 /* login.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login.mp4; sourceTree = "<group>"; };
@@ -86,12 +101,13 @@
 		E296A0E71DE7743600007AC1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E296A0EB1DE77B1300007AC1 /* NewAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAccountVC.swift; sourceTree = "<group>"; };
 		E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
-		E296A0FA1DE78B4F00007AC1 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
-		E296A0FB1DE78B4F00007AC1 /* SCLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
 		E296A0FE1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		E296A1011DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		E29F885C1E021466000C1F21 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		E29F885E1E021774000C1F21 /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
+		E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfoCell.swift; sourceTree = "<group>"; };
 		E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionVC.swift; sourceTree = "<group>"; };
 		E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
 		E2EFE76F1DE752FB002E8003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,6 +170,7 @@
 				E2EFE7671DE75114002E8003 /* View */,
 				E2EFE7661DE7510C002E8003 /* Modal */,
 				E267D2B81DE68D92003B3F00 /* login.mp4 */,
+				E229F6911E00E4920014FF81 /* cube.gif */,
 				E2EFE76F1DE752FB002E8003 /* Assets.xcassets */,
 				E22BC67C1DE50DED00A34C59 /* Main.storyboard */,
 				E22BC6811DE50DED00A34C59 /* LaunchScreen.storyboard */,
@@ -182,15 +199,6 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
-		E296A0F31DE78B3300007AC1 /* SCLAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				E296A0FA1DE78B4F00007AC1 /* SCLAlertView.swift */,
-				E296A0FB1DE78B4F00007AC1 /* SCLExtensions.swift */,
-			);
-			name = SCLAlertView;
-			sourceTree = "<group>";
-		};
 		E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,10 +213,10 @@
 		E2EA0F111DE7B3A60032048D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E229F68F1E00E4450014FF81 /* SwiftGif.swift */,
 				E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */,
 				E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */,
 				E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */,
-				E296A0F31DE78B3300007AC1 /* SCLAlertView */,
 				E296A0D41DE772A400007AC1 /* Firebase */,
 			);
 			name = Frameworks;
@@ -220,6 +228,7 @@
 				E267D2C01DE6A989003B3F00 /* Item.swift */,
 				E22BC6781DE50DED00A34C59 /* AppDelegate.swift */,
 				E20CF9651DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift */,
+				E24E3EE91E023194006F0276 /* User.swift */,
 			);
 			name = Modal;
 			sourceTree = "<group>";
@@ -227,7 +236,13 @@
 		E2EFE7671DE75114002E8003 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E229F6891E00DF7E0014FF81 /* RefreshContents.xib */,
 				E267D2C21DE6AB6F003B3F00 /* ItemCell.swift */,
+				E229F6831E00C8620014FF81 /* ItemCarouselCell.swift */,
+				E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */,
+				E29F885C1E021466000C1F21 /* ActionCell.swift */,
+				E29F885E1E021774000C1F21 /* BubbleTransition.swift */,
+				E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -240,6 +255,7 @@
 				E22BC67A1DE50DED00A34C59 /* LogInVC.swift */,
 				E296A0EB1DE77B1300007AC1 /* NewAccountVC.swift */,
 				E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */,
+				E229F6871E00CE340014FF81 /* ItemVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -311,6 +327,8 @@
 				E296A0E81DE7743600007AC1 /* GoogleService-Info.plist in Resources */,
 				E22BC6831DE50DED00A34C59 /* LaunchScreen.storyboard in Resources */,
 				E22BC67E1DE50DED00A34C59 /* Main.storyboard in Resources */,
+				E229F6921E00E4920014FF81 /* cube.gif in Resources */,
+				E229F68A1E00DF7E0014FF81 /* RefreshContents.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,14 +341,20 @@
 			files = (
 				E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */,
 				E20CF9661DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift in Sources */,
+				E229F6881E00CE340014FF81 /* ItemVC.swift in Sources */,
+				E29F885F1E021774000C1F21 /* BubbleTransition.swift in Sources */,
 				E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */,
 				E267D2C11DE6A989003B3F00 /* Item.swift in Sources */,
 				E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				E22BC67B1DE50DED00A34C59 /* LogInVC.swift in Sources */,
-				E296A0FC1DE78B4F00007AC1 /* SCLAlertView.swift in Sources */,
-				E296A0FD1DE78B4F00007AC1 /* SCLExtensions.swift in Sources */,
+				E2CFE41A1E01D4D30000F4FF /* ItemInfoCell.swift in Sources */,
+				E229F6841E00C8620014FF81 /* ItemCarouselCell.swift in Sources */,
+				E24E3EEC1E0233B3006F0276 /* SellerInfoCell.swift in Sources */,
+				E29F885D1E021466000C1F21 /* ActionCell.swift in Sources */,
+				E229F6901E00E4460014FF81 /* SwiftGif.swift in Sources */,
 				E296A1031DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				E267D2C31DE6AB6F003B3F00 /* ItemCell.swift in Sources */,
+				E24E3EEA1E023194006F0276 /* User.swift in Sources */,
 				E22BC6791DE50DED00A34C59 /* AppDelegate.swift in Sources */,
 				E267D2B71DE67DF3003B3F00 /* IntroVC.swift in Sources */,
 				E296A0EC1DE77B1300007AC1 /* NewAccountVC.swift in Sources */,

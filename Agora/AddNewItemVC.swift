@@ -11,6 +11,7 @@ import ImagePicker
 import Firebase
 import FirebaseDatabase
 import FirebaseStorage
+import SwiftMessages
 
 class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -136,10 +137,21 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
                 print("connected")
                 if let userDict = snapshot.value as? [String : AnyObject] {
                     let name = userDict["name"] as! String
-                    itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "images": self.imgURLs])
+                    let email = userDict["email"] as! String
+                    let phone = userDict["phone"] as! String
+                    let profileURL = userDict["image"] as! String
+                    itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "email": String(describing: email), "phone": String(describing: phone), "seller_picture": String(describing: profileURL),"images": self.imgURLs])
                     print("urls")
                     print(self.imgURLs)
                     self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+                    let view = MessageView.viewFromNib(layout: .StatusLine)
+                    view.button?.removeFromSuperview()
+                    view.configureTheme(Theme.success)
+                    var config = SwiftMessages.Config()
+                    config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+                    view.configureContent(title: "Success!", body: "Item successfully uploaded!")
+                    view.configureTheme(backgroundColor: UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00), foregroundColor: UIColor.white)
+                    SwiftMessages.show(config: config, view: view)
                     self.performSegue(withIdentifier: "unwind", sender: self)
                 }
             })

@@ -20,9 +20,15 @@ class ItemCell: UICollectionViewCell {
     func setUpCell(obj: Item) {
         spinner.startAnimating()
         imageView.loadImageUsingUrlString(urlString: obj.imageURLs[0])
-        costLabel.text = NSString(format:"     $%.2f   ", obj.cost) as String
+        let price = obj.cost as NSNumber
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        
+        costLabel.text = "     " + formatter.string(from: price)! + "   "
+        
         itemNameLabel.text = obj.name
-        ownerLabel.text = obj.seller
+        ownerLabel.text = obj.seller.name
         let condition = obj.condition
         if condition == "New with Tags" {
             conditionLabel.textColor = UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00)
