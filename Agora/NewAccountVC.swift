@@ -141,6 +141,8 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             self.present(imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.popoverPresentationController?.sourceView = sender as? UIView
+        alert.popoverPresentationController?.sourceRect = sender.bounds
         self.present(alert, animated: true, completion: nil)
     }
     

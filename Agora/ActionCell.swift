@@ -47,7 +47,7 @@ class ActionCell: UITableViewCell {
         }))
         alert.addAction(UIAlertAction(title: "Phone Call", style: .default, handler: {
             action in
-            let url = NSURL(string: "tel://\(self.phone)")!
+            let url = NSURL(string: "telprompt://\(self.phone)")!
             UIApplication.shared.openURL(url as URL)
         }))
         alert.addAction(UIAlertAction(title: "Text Message", style: .default, handler: {
@@ -60,6 +60,8 @@ class ActionCell: UITableViewCell {
             
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.popoverPresentationController?.sourceView = sender as? UIView
+        alert.popoverPresentationController?.sourceRect = sender.bounds
         vc?.present(alert, animated: true, completion: nil)
     }
     

@@ -8,9 +8,15 @@
 
 import UIKit
 import MessageUI
+import Firebase
+import FirebaseDatabase
 
 class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
 
+    @IBOutlet weak var commentView: UIView!
+    
+    @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var pageCounter: UILabel!
     
     @IBOutlet weak var carousel: UIScrollView!
@@ -19,7 +25,13 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var commentTextField: UITextField!
+    
+    @IBOutlet weak var postButton: UIButton!
+    
     var item: Item!
+    
+    var comments = [Comment]()
     
     var refreshControl: UIRefreshControl!
 
@@ -27,9 +39,12 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     
     var count = 0
     
-    var imageURLs = [String]()//["https://firebasestorage.googleapis.com/v0/b/agora-54dab.appspot.com/o/Items%2F58DC848E-E4BD-4396-B008-9A41B806EB46.jpg?alt=media&token=d9ff3355-8bc4-439e-b585-5e18850340fd", "https://firebasestorage.googleapis.com/v0/b/agora-54dab.appspot.com/o/Items%2FBE442CA2-07D6-4F3E-B032-F884B3FA69E8.jpg?alt=media&token=314ea0c9-5303-4bfb-835f-9963ad528b83", "https://firebasestorage.googleapis.com/v0/b/agora-54dab.appspot.com/o/Items%2FEFAFA62E-8BA0-406C-988B-E249F84AC4A9.jpg?alt=media&token=215d8c85-2f0e-4ce4-b5b3-afe9b4361464"]
+    var imageURLs = [String]()
+    
+    var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
+        ref = FIRDatabase.database().reference()
         tableView.delegate = self
         tableView.dataSource = self
         imageURLs = item.imageURLs
@@ -37,6 +52,11 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         carousel.delegate = self
         pageControl.numberOfPages = imageURLs.count
         pageCounter.text = "1 of \(count)"
+        
+        getComments()
+        
+        commentView.layer.borderWidth = 0.5
+        commentView.layer.borderColor = UIColor(red:0.59, green:0.59, blue:0.60, alpha:1.00).cgColor
         
         refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.clear
@@ -46,10 +66,32 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         loadCustomRefreshContents()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 500
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.hideKeyboardWhenTappedAround()
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -63,6 +105,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         carousel.contentSize = CGSize(width: self.view.bounds.width * CGFloat(count), height: 200)
         carousel.showsHorizontalScrollIndicator = false
         
@@ -75,7 +118,6 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
             image.frame.size.width = self.view.bounds.width
             image.frame.origin.x = CGFloat(index) * self.view.bounds.width
             image.frame.size.height = 200
-            print("done")
         }
     }
     
@@ -102,7 +144,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4 + comments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,18 +159,29 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
             cell.setUpCell(seller: item.seller)
             return cell
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "actionButtons", for: indexPath as IndexPath) as! ActionCell
-            cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0)
-            cell.setUpCell(seller: item.seller, itemName: item.name,vc: self)
-            return cell
+            if (FIRAuth.auth()?.currentUser?.uid)! as String != item.seller.id {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "actionButtons", for: indexPath as IndexPath) as! ActionCell
+                cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0)
+                cell.setUpCell(seller: item.seller, itemName: item.name,vc: self)
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ownerActions", for: indexPath as IndexPath) as! OwnerActionsCell
+                cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0)
+                cell.setUpCell(itemID: item.firebaseKey, vc: self)
+                return cell
+            }
         } else if (indexPath.row == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentHead", for: indexPath as IndexPath)
+            cell.preservesSuperviewLayoutMargins = false
+            cell.separatorInset = UIEdgeInsets.zero
+            cell.layoutMargins = UIEdgeInsets.zero
             return cell
-        } else if (indexPath.row == 4) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath as IndexPath)
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath as IndexPath) as! CommentCell
+            let comment = comments[indexPath.row - 4]
+            cell.setUpCell(comment: comment)
             return cell
         }
-        return UITableViewCell()
     }
 
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -138,6 +191,63 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func addComment(_ sender: AnyObject) {
+        let userID = (FIRAuth.auth()?.currentUser?.uid)! as String
+        let commentText = commentTextField.text!
+        commentTextField.text = ""
+        let comment = Comment(comment: commentText, userID: userID, timeStamp: 0.0)
+        comment.getUserInfo()
+        comments.append(comment)
+        let ind = 3 + comments.count
+        let path = IndexPath(row: ind, section: 0)
+        self.view.endEditing(true)
+        tableView.reloadData()
+        tableView.scrollToRow(at: path, at: UITableViewScrollPosition.none, animated: true)
+        let commentRef = ref.child("items").child(item.firebaseKey).child("comments").childByAutoId()
+        commentRef.setValue(["user": String(describing: userID), "comment": String(describing: commentText), "time": NSDate().timeIntervalSince1970])
+    }
+    
+    func getComments() {
+        ref.child("items").child(item.firebaseKey).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
+            //self.beginLoading()
+            if let json = snapshot.value as? [String : AnyObject] {
+                for dict in json {
+                    if let dict = dict.value as? [String : AnyObject] {
+                        print(dict)
+                        let userID = dict["user"] as! String
+                        let text = dict["comment"] as! String
+                        let time = dict["time"] as! Double
+                        let comment = Comment(comment: text, userID: userID, timeStamp: time)
+                        comment.getUserInfo()
+                        self.comments.append(comment)
+                    }
+                }
+            }
+            self.comments.sort(by: {$0.numericTimeStamp < $1.numericTimeStamp})
+            self.tableView.reloadData()
+        })
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddBid" {
+            let vc = segue.destination as! AddBidVC
+            vc.currentBid = item.cost
+            vc.itemID = item.firebaseKey
+            vc.userID = (FIRAuth.auth()?.currentUser?.uid)! as String
+            vc.vc = self
+        } else if segue.identifier == "toMarket" {
+            print("prepared")
+            let vc = segue.destination as! AuctionVC
+            //self.view.addSubview(vc.view)
+            vc.loadedOnce = false
+        } else if segue.identifier == "toSeeBids" {
+            let vc = segue.destination as! BidVC
+            vc.item = item
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

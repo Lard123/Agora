@@ -13,7 +13,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import SwiftMessages
 
-class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -26,8 +26,13 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     @IBOutlet weak var conditionButton: UIButton!
     @IBOutlet weak var conditionLabel: UILabel!
     
+    @IBOutlet weak var loadingGif: UIImageView!
+    
+    @IBOutlet weak var loadingView: UIView!
+    
     var itemImages = [UIImage]()
     var imgURLs = [String:String]()
+    let numberFormatter = NumberFormatter()
     
     var ref: FIRDatabaseReference!
     
@@ -44,6 +49,12 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         descriptionTextView.textColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.00)
         descriptionTextView.layer.borderColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.00).cgColor
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        self.startingBidField.delegate = self
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
         // Do any additional setup after loading the view.
     }
 
@@ -126,7 +137,11 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     @IBAction func submitItem(_ sender: AnyObject) {
         //self.beginLoading()
-        let startingBid = NSString(format:"%.2f", Double(startingBidField.text!)!) as String
+        loadingGif.loadGif(name: "cube")
+        UIView.animate(withDuration: 0.4) { 
+            self.loadingView.alpha = 1
+        }
+        let startingBid = NSString(format:"%.2f", Double(startingBidField.text!.replacingOccurrences(of: ",", with: ""))!) as String
         let itemName = nameItemField.text!
         let condition = conditionLabel.text!.replacingOccurrences(of: "Selected Condition: ", with: "")
         let description = descriptionTextView.text!
@@ -187,6 +202,42 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
             print("wubalubadubdub")
             print(imgURLs)
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var originalString = textField.text
+        
+        // Replace any formatting commas
+        originalString = originalString?.replacingOccurrences(of: ",", with: "")
+        
+        var doubleFromString:  Double!
+        
+        if originalString!.isEmpty {
+            originalString = string
+            doubleFromString = Double(originalString!)
+            doubleFromString! /= 100
+        } else {
+            if string.isEmpty {
+                // Replace the last character for 0
+                let loc = originalString!.characters.count - 1
+                let range = NSMakeRange(loc, 1)
+                let newString = (originalString! as NSString).replacingCharacters(in: range, with: "0")
+                doubleFromString = Double(newString)
+                doubleFromString! /= 10
+            } else {
+                originalString = originalString! + string
+                doubleFromString = Double(originalString!)
+                doubleFromString! *= 10
+            }
+            
+        }
+        
+        let finalString = numberFormatter.string(from: doubleFromString as NSNumber)
+        
+        textField.text = finalString
+        
+        return false
     }
     
     func imageToBase64(image: UIImage) -> String {

@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseDatabase
 
 class User: NSObject {
-    var name: String = ""
-    var phone: String = ""
-    var email: String = ""
-    var pictureURL: String = ""
-    var id: String = ""
+    var name = ""
+    var phone = ""
+    var email = ""
+    var pictureURL = ""
+    var id = ""
     
     init(name: String, phone: String, email: String, pictureURL: String, id: String) {
         self.name = name
@@ -21,5 +23,21 @@ class User: NSObject {
         self.email = email
         self.pictureURL = pictureURL
         self.id = id
+    }
+    
+    init(sellerID: String) {
+        self.id = sellerID
+    }
+    
+    func getUserInfo() {
+        let ref = FIRDatabase.database().reference()
+        ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userDict = snapshot.value as? [String : AnyObject] {
+                self.name = userDict["name"] as! String
+                self.email = userDict["email"] as! String
+                self.phone = userDict["phone"] as! String
+                self.pictureURL = userDict["image"] as! String
+            }
+        })
     }
 }

@@ -32,8 +32,6 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         }) { (error) in
             print(error.localizedDescription)
         }*/
-        targetMeter.setProgress(0, animated: false)
-        targetMeter.setProgress(0.5, animated: true)
         mapView.delegate = self
         school.coordinate = CLLocationCoordinate2DMake(37.3196, -122.0092)
         school.imageName = "dusty.png"

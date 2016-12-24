@@ -16,13 +16,15 @@ class Item: NSObject {
     var cost: Double = 0
     var imageURLs = [String]()
     var seller: User!
+    var firebaseKey: String = ""
     
-    init(name: String, condition: String, seller: User, imageURLs: [String], cost: Double, description: String) {
+    init(name: String, condition: String, seller: User, imageURLs: [String], cost: Double, description: String, firebaseKey: String) {
         self.name = name
         self.condition = condition
         self.seller = seller
         self.imageURLs = imageURLs
         self.cost = cost
         self.descrip = description
+        self.firebaseKey = firebaseKey
     }
 }

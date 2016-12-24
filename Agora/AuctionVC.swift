@@ -63,6 +63,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             //self.beginLoading()
             if let json = snapshot.value as? [String : AnyObject] {
                 for dict in json {
+                    let key = dict.key
                     if let dict = dict.value as? [String : AnyObject] {
                         print(dict)
                         let currentBid = dict["bid"] as! String
@@ -74,11 +75,10 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                         let itemName = dict["name"] as! String
                         let sellerID = dict["sellerID"] as! String
                         let sellerName = dict["seller"] as! String
-                        let email = dict["email"] as! String
-                        let phone = dict["phone"] as! String
-                        let userPicture = dict["seller_picture"] as! String
-                        let seller = User(name: sellerName, phone: phone, email: email, pictureURL: userPicture, id: sellerID)
-                        let i = Item(name: itemName, condition: condition, seller: seller, imageURLs: images, cost: Double(currentBid)!, description: description)
+                        let seller = User(sellerID: sellerID)
+                        seller.name = sellerName
+                        seller.getUserInfo()
+                        let i = Item(name: itemName, condition: condition, seller: seller, imageURLs: images, cost: Double(currentBid)!, description: description, firebaseKey: key)
                         self.items.append(i)
                     }
                 }
@@ -88,6 +88,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             self.collectionView.reloadData()
         })
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
@@ -110,12 +111,6 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return .lightContent
     }
     
-    func base64ToImage(base64String: String) -> UIImage {
-        let decodedData = NSData(base64Encoded: base64String, options: .ignoreUnknownCharacters)
-        let decodedimage = UIImage(data: decodedData as! Data)
-        return decodedimage!
-    }
-    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.startingPoint = centerOfItem
@@ -126,7 +121,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = centerOfItem
-        
+
         return transition
     }
 
@@ -135,11 +130,13 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         //self.endLoading(vc: self, dismissVC: false)
         if (segue.identifier == "toItemDetail") {
             let auction = segue.destination as! ItemVC
-            auction.transitioningDelegate = self
-            auction.modalPresentationStyle = .custom
+            //auction.transitioningDelegate = self
+            //auction.modalPresentationStyle = .custom
             auction.item = selectedItem
         }
     }
+    
+    @IBAction func unwindToMarket(segue: UIStoryboardSegue) {}
     
     /*
      // MARK: - Navigation
