@@ -30,7 +30,6 @@ class CustomImageView: UIImageView {
         URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, respones, error) in
             
             if error != nil {
-                print(error)
                 return
             }
             

@@ -188,9 +188,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
             let uploadData = UIImageJPEGRepresentation(img, 0.5)
             storageRef.put(uploadData!, metadata: nil, completion: { (metadata, error) in
                 print("check")
-                if error != nil {
-                    print(error)
-                } else {
+                if error == nil {
                     if let imageUrl = metadata?.downloadURL()?.absoluteString {
                         self.imgURLs["image\(index + 1)"] = imageUrl
                         if index == self.itemImages.count - 1 {

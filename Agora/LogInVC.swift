@@ -68,7 +68,6 @@ class LogInVC: UIViewController {
                 } else {
                     self.endLoading(vc: self, dismissVC: false)
                     let errText = (error?.localizedDescription)!
-                    print(error)
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
                         self.showLoginError(text: "The form has been filled out incorrectly. Check for errors.")
                     } else {

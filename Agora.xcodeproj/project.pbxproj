@@ -27,8 +27,6 @@
 		E25662CA1E0B1D2200805010 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; };
 		E25662CB1E0B1D2200805010 /* FirebaseDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; };
-		E25A625B1DF4D02B00F22E40 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; };
-		E25A625C1DF4D02B00F22E40 /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E25A62611DF4D03A00F22E40 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DB1DE7738C00007AC1 /* FirebaseAnalytics.framework */; };
 		E25A62691DF4D03A00F22E40 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DF1DE7738C00007AC1 /* GoogleSymbolUtilities.framework */; };
 		E25A626B1DF4D03A00F22E40 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0E01DE7738C00007AC1 /* GoogleToolboxForMac.framework */; };
@@ -43,19 +41,21 @@
 		E296A0E41DE7738C00007AC1 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DE1DE7738C00007AC1 /* GoogleInterchangeUtilities.framework */; };
 		E296A0E81DE7743600007AC1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E296A0E71DE7743600007AC1 /* GoogleService-Info.plist */; };
 		E296A0EC1DE77B1300007AC1 /* NewAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A0EB1DE77B1300007AC1 /* NewAccountVC.swift */; };
-		E296A0EE1DE785A400007AC1 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; };
 		E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */; };
 		E296A1031DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		E29F885D1E021466000C1F21 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885C1E021466000C1F21 /* ActionCell.swift */; };
 		E29F885F1E021774000C1F21 /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885E1E021774000C1F21 /* BubbleTransition.swift */; };
+		E2A67B3D1E15AC7200E3CC5A /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; };
+		E2A67B3E1E15AC7200E3CC5A /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; };
+		E2A67B401E15AC7200E3CC5A /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2CFE41A1E01D4D30000F4FF /* ItemInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */; };
 		E2E4A1B81E0B4F8600354971 /* OwnerActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1B71E0B4F8600354971 /* OwnerActionsCell.swift */; };
 		E2E4A1BA1E0B527D00354971 /* BidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1B91E0B527D00354971 /* BidVC.swift */; };
 		E2E4A1BC1E0B683000354971 /* BidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1BB1E0B683000354971 /* BidCell.swift */; };
 		E2E4A1C01E0B70F000354971 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1BF1E0B70F000354971 /* Bid.swift */; };
+		E2E9D53F1E15AC3B00A8D92C /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; };
 		E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */; };
-		E2EA794E1DEBDE4F007128E2 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; };
-		E2EA794F1DEBDE4F007128E2 /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2EFE7711DE75304002E8003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EFE76F1DE752FB002E8003 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -66,9 +66,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E2A67B3E1E15AC7200E3CC5A /* ImagePicker.framework in Embed Frameworks */,
 				E25662CB1E0B1D2200805010 /* FirebaseDatabase.framework in Embed Frameworks */,
-				E25A625C1DF4D02B00F22E40 /* SwiftMessages.framework in Embed Frameworks */,
-				E2EA794F1DEBDE4F007128E2 /* ImagePicker.framework in Embed Frameworks */,
+				E2A67B401E15AC7200E3CC5A /* SwiftMessages.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +96,7 @@
 		E24E3EE91E023194006F0276 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerInfoCell.swift; sourceTree = "<group>"; };
 		E25662C81E0B189800805010 /* AddBidVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBidVC.swift; sourceTree = "<group>"; };
-		E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftMessages.framework; sourceTree = "<group>"; };
+		E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = /Users/varunshenoy/Desktop/Projects/Apps/Agora/Agora/SwiftMessages.framework; sourceTree = "<absolute>"; };
 		E267D2B61DE67DF3003B3F00 /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E267D2B81DE68D92003B3F00 /* login.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login.mp4; sourceTree = "<group>"; };
 		E267D2C01DE6A989003B3F00 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -125,8 +125,9 @@
 		E2E4A1B91E0B527D00354971 /* BidVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidVC.swift; sourceTree = "<group>"; };
 		E2E4A1BB1E0B683000354971 /* BidCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidCell.swift; sourceTree = "<group>"; };
 		E2E4A1BF1E0B70F000354971 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
+		E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
+		E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftMessages.framework; sourceTree = "<group>"; };
 		E2EA0F0E1DE7B2CE0032048D /* AuctionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionVC.swift; sourceTree = "<group>"; };
-		E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ImagePicker.framework; sourceTree = "<group>"; };
 		E2EFE76F1DE752FB002E8003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,19 +137,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E25662CA1E0B1D2200805010 /* FirebaseDatabase.framework in Frameworks */,
+				E2A67B3D1E15AC7200E3CC5A /* ImagePicker.framework in Frameworks */,
 				E25A626B1DF4D03A00F22E40 /* GoogleToolboxForMac.framework in Frameworks */,
 				E25A62611DF4D03A00F22E40 /* FirebaseAnalytics.framework in Frameworks */,
-				E296A0EE1DE785A400007AC1 /* FirebaseDatabase.framework in Frameworks */,
+				E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */,
 				E25A62691DF4D03A00F22E40 /* GoogleSymbolUtilities.framework in Frameworks */,
-				E2EA794E1DEBDE4F007128E2 /* ImagePicker.framework in Frameworks */,
 				E296A0E21DE7738C00007AC1 /* FirebaseCore.framework in Frameworks */,
 				E296A0DA1DE772C700007AC1 /* GTMSessionFetcher.framework in Frameworks */,
 				E296A0E31DE7738C00007AC1 /* FirebaseInstanceID.framework in Frameworks */,
 				E296A0E41DE7738C00007AC1 /* GoogleInterchangeUtilities.framework in Frameworks */,
 				E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */,
 				E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */,
+				E2E9D53F1E15AC3B00A8D92C /* ImagePicker.framework in Frameworks */,
 				E25A626F1DF4D03A00F22E40 /* FirebaseAuth.framework in Frameworks */,
-				E25A625B1DF4D02B00F22E40 /* SwiftMessages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,8 +233,8 @@
 			isa = PBXGroup;
 			children = (
 				E229F68F1E00E4450014FF81 /* SwiftGif.swift */,
-				E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */,
-				E2EA794C1DEBDD8D007128E2 /* ImagePicker.framework */,
+				E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */,
+				E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */,
 				E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */,
 				E296A0D41DE772A400007AC1 /* Firebase */,
 			);
@@ -313,7 +314,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Varun Shenoy";
 				TargetAttributes = {
 					E22BC6741DE50DED00A34C59 = {
@@ -433,6 +434,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -455,7 +457,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -483,6 +485,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -499,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -519,7 +522,7 @@
 					"$(PROJECT_DIR)/Agora",
 				);
 				INFOPLIST_FILE = Agora/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9;
+				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
@@ -544,7 +547,7 @@
 					"$(PROJECT_DIR)/Agora",
 				);
 				INFOPLIST_FILE = Agora/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9;
+				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",

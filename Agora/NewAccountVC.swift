@@ -72,9 +72,7 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     //TODO: Check if avatar is nil
                     if let uploadData = UIImageJPEGRepresentation(self.imageView.image!, 0.5) {
                         storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
-                            if error != nil {
-                                print(error)
-                            } else {
+                            if error == nil {
                                 if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                                     self.ref.child("users").child((user?.uid)!).setValue(["name": name, "email": email, "phone": phone, "image": profileImageUrl])
                                     self.endLoading(vc: self, dismissVC: true)
@@ -92,7 +90,6 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     }
                 } else {
                     let errText = (error?.localizedDescription)!
-                    print(error)
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
                         self.showSignupError(text:"Check for errors in your entries.", headerText: "Form has been filled out incorrectly.")
                     } else {
