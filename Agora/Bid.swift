@@ -32,7 +32,7 @@ class Bid: NSObject {
 
     }
     
-    func getUserInfo() {
+    func getUserInfo(completionHandler:@escaping (Bool) -> ()) {
         let ref = FIRDatabase.database().reference()
         ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let userDict = snapshot.value as? [String : AnyObject] {
@@ -40,6 +40,9 @@ class Bid: NSObject {
                 self.pictureURL = userDict["image"] as! String
                 self.email = userDict["email"] as! String
                 self.phone = userDict["phone"] as! String
+                print("name: " + self.name)
+                print("pictureURL: " + self.pictureURL)
+                completionHandler(true)
             }
         })
     }

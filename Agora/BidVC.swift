@@ -43,6 +43,10 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         controller.dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+    
     func getBids() {
         ref.child("items").child(item.firebaseKey).child("bids").observeSingleEvent(of: .value, with: { (snapshot) in
             //self.beginLoading()
@@ -54,7 +58,6 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
                         let bidAmount = dict["bid"] as! String
                         let time = dict["time"] as! Double
                         let bid = Bid(cost: Double(bidAmount)!, userID: userID, timeStamp: time)
-                        bid.getUserInfo()
                         self.bids.append(bid)
                     }
                 }
@@ -63,6 +66,10 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
             self.tableView.reloadData()
         })
         
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

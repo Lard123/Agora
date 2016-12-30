@@ -4,6 +4,7 @@
 //
 //  Created by Varun Shenoy on 11/27/16.
 //  Copyright © 2016 Varun Shenoy. All rights reserved.
+//  TODO: Add checks if labesls/fields are empty
 //
 
 import UIKit
@@ -137,40 +138,76 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     @IBAction func submitItem(_ sender: AnyObject) {
         //self.beginLoading()
-        loadingGif.loadGif(name: "cube")
-        UIView.animate(withDuration: 0.4) { 
-            self.loadingView.alpha = 1
-        }
-        let startingBid = NSString(format:"%.2f", Double(startingBidField.text!.replacingOccurrences(of: ",", with: ""))!) as String
         let itemName = nameItemField.text!
         let condition = conditionLabel.text!.replacingOccurrences(of: "Selected Condition: ", with: "")
         let description = descriptionTextView.text!
-        let itemRef = ref.child("items").childByAutoId()
-        let userID = (FIRAuth.auth()?.currentUser?.uid)!
-        imagesToURLs { (bool) in
-            self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-                print("connected")
-                if let userDict = snapshot.value as? [String : AnyObject] {
-                    let name = userDict["name"] as! String
-                    let email = userDict["email"] as! String
-                    let phone = userDict["phone"] as! String
-                    let profileURL = userDict["image"] as! String
-                    itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "email": String(describing: email), "phone": String(describing: phone), "seller_picture": String(describing: profileURL),"images": self.imgURLs])
-                    print("urls")
-                    print(self.imgURLs)
-                    self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
-                    let view = MessageView.viewFromNib(layout: .StatusLine)
-                    view.button?.removeFromSuperview()
-                    view.configureTheme(Theme.success)
-                    var config = SwiftMessages.Config()
-                    config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
-                    view.configureContent(title: "Success!", body: "Item successfully uploaded!")
-                    view.configureTheme(backgroundColor: UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00), foregroundColor: UIColor.white)
-                    SwiftMessages.show(config: config, view: view)
-                    self.performSegue(withIdentifier: "unwind", sender: self)
-                }
-            })
+        print("description: " + description)
+        if itemName.replacingOccurrences(of: " ", with: "") == "" {
+            self.showAddItemError(text: "Please enter an item name.", headerText: "Add New Item Error")
+            nameItemField.attributedPlaceholder = NSAttributedString(string:"Name of Item",
+                                                                     attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        } else if condition == "None" {
+            self.showAddItemError(text: "Please enter the condition of your item.", headerText: "Add New Item Error")
+        } else if description.replacingOccurrences(of: " ", with: "") == "" {
+            self.showAddItemError(text: "Please enter an item description.", headerText: "Add New Item Error")
+        } else if startingBidField.text == "" || startingBidField.text == "0.00"{
+            self.showAddItemError(text: "Please enter a valid starting bid for your item.", headerText: "Add New Item Error")
+            startingBidField.attributedPlaceholder = NSAttributedString(string:"Starting Bid",
+                                                                     attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
+        }  else if itemImages.count == 0 {
+            self.showAddItemError(text: "Please add some images for your item.", headerText: "Add New Item Error")
+        } else {
+            loadingGif.loadGif(name: "cube")
+            UIView.animate(withDuration: 0.4) {
+                self.loadingView.alpha = 1
+            }
+            let startingBid = NSString(format:"%.2f", Double(startingBidField.text!.replacingOccurrences(of: ",", with: ""))!) as String
+            let itemRef = ref.child("items").childByAutoId()
+            let userID = (FIRAuth.auth()?.currentUser?.uid)!
+            imagesToURLs { (bool) in
+                self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                    print("connected")
+                    if let userDict = snapshot.value as? [String : AnyObject] {
+                        let name = userDict["name"] as! String
+                        let email = userDict["email"] as! String
+                        let phone = userDict["phone"] as! String
+                        let profileURL = userDict["image"] as! String
+                        itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "email": String(describing: email), "phone": String(describing: phone), "seller_picture": String(describing: profileURL),"images": self.imgURLs])
+                        print("urls")
+                        print(self.imgURLs)
+                        self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+                        let view = MessageView.viewFromNib(layout: .StatusLine)
+                        view.button?.removeFromSuperview()
+                        view.configureTheme(Theme.success)
+                        var config = SwiftMessages.Config()
+                        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+                        view.configureContent(title: "Success!", body: "Item successfully uploaded!")
+                        view.configureTheme(backgroundColor: UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00), foregroundColor: UIColor.white)
+                        SwiftMessages.show(config: config, view: view)
+                        self.performSegue(withIdentifier: "unwind", sender: self)
+                    }
+                })
+            }
         }
+    }
+    
+    func showAddItemError(text: String, headerText: String) {
+        let view = MessageView.viewFromNib(layout: .CardView)
+        view.button?.removeFromSuperview()
+        
+        // Theme message elements with the warning style.
+        view.configureTheme(.error)
+        
+        // Add a drop shadow.
+        view.configureDropShadow()
+        
+        // Set message title, body, and icon. Here, we're overriding the default warning
+        // image with an emoji character.
+        view.configureContent(title: headerText, body: text)
+        
+        // Show the message.
+        SwiftMessages.show(view: view)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -237,20 +274,5 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         
         return false
     }
-    
-    func imageToBase64(image: UIImage) -> String {
-        let imageData = UIImagePNGRepresentation(image)
-        let base64String = imageData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-        return base64String!
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

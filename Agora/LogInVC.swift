@@ -71,7 +71,11 @@ class LogInVC: UIViewController {
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
                         self.showLoginError(text: "The form has been filled out incorrectly. Check for errors.")
                     } else {
-                        self.showLoginError(text: (error?.localizedDescription)!)
+                        if (error?.localizedDescription)!.contains("The user may have been deleted.") {
+                            self.showLoginError(text: "There is no user with the entered email and password. Double check your password.")
+                        } else {
+                            self.showLoginError(text: (error?.localizedDescription)!)
+                        }
                     }
                 }
             }

@@ -202,10 +202,10 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         let ind = 3 + comments.count
         let path = IndexPath(row: ind, section: 0)
         self.view.endEditing(true)
-        tableView.reloadData()
-        tableView.scrollToRow(at: path, at: UITableViewScrollPosition.none, animated: true)
         let commentRef = ref.child("items").child(item.firebaseKey).child("comments").childByAutoId()
         commentRef.setValue(["user": String(describing: userID), "comment": String(describing: commentText), "time": NSDate().timeIntervalSince1970])
+        tableView.reloadData()
+        tableView.scrollToRow(at: path, at: UITableViewScrollPosition.bottom, animated: true)
     }
     
     func getComments() {

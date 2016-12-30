@@ -155,12 +155,6 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func imageToBase64(image: UIImage) -> String {
-        let imageData = UIImagePNGRepresentation(image)
-        let base64String = imageData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-        return base64String!
-    }
 
     /*
     // MARK: - Navigation

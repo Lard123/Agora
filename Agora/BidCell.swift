@@ -33,20 +33,28 @@ class BidCell: UITableViewCell {
     }
     
     func setUpCell(bid: Bid, vc: BidVC, itemID: String) {
-        ref = FIRDatabase.database().reference()
-        self.vc = vc
-        self.bid = bid
-        self.itemID = itemID
-        let price = bid.cost as NSNumber
-        
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        
-        bidAmountLabel.text = formatter.string(from: price)
-        
-        profileImage.loadImageUsingUrlString(urlString: bid.pictureURL)
-        nameLabel.text = bid.name
-        timeLabel.text = bid.timeStamp
+        bid.getUserInfo(completionHandler: { (bool) in
+            self.ref = FIRDatabase.database().reference()
+            self.vc = vc
+            self.bid = bid
+            print("id: " + bid.userID)
+            print("name: " + bid.name)
+            print("email: " + bid.email)
+            print("image: " + bid.pictureURL)
+            
+            self.itemID = itemID
+            let price = bid.cost as NSNumber
+            
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            
+            self.bidAmountLabel.text = formatter.string(from: price)
+            
+            self.nameLabel.text = bid.name
+            self.timeLabel.text = bid.timeStamp
+            self.profileImage.loadImageUsingUrlString(urlString: bid.pictureURL)
+            print("done")
+        })
     }
     
     @IBAction func contactBidder(_ sender: AnyObject) {
@@ -83,17 +91,32 @@ class BidCell: UITableViewCell {
     @IBAction func sellItemOff(_ sender: AnyObject) {
         let itemRef = self.ref.child("items").child(self.itemID)
         itemRef.removeValue()
-        let view = MessageView.viewFromNib(layout: .CardView)
-        view.button?.removeFromSuperview()
-        
-        view.configureTheme(.success)
-        
-        view.configureDropShadow()
-        
-        view.configureContent(title: "Item sold!", body: "Item has successfully been sold. Be sure to turn in the money to Mr. St. John in Room 914!")
-        
-        SwiftMessages.show(view: view)
-        self.vc?.performSegue(withIdentifier: "toMarket", sender: self)
+        increaseTotalFunded { (bool) in
+            let view = MessageView.viewFromNib(layout: .CardView)
+            view.button?.removeFromSuperview()
+            
+            view.configureTheme(.success)
+            
+            view.configureDropShadow()
+            
+            view.configureContent(title: "Item sold!", body: "Item has successfully been sold. Be sure to turn in the money to Mr. St. John in Room 914!")
+            
+            SwiftMessages.show(view: view)
+            self.vc?.performSegue(withIdentifier: "toMarket", sender: self)
+        }
+    }
+    
+    func increaseTotalFunded(completionHandler:@escaping (Bool) -> ()) {
+        ref.child("stats").observeSingleEvent(of: .value, with: { (snapshot) in
+            //self.beginLoading()
+            if let dict = snapshot.value as? [String : AnyObject] {
+                print(dict)
+                let currentAmount = dict["current"] as! Double
+                let fullRef = self.ref.child("stats").child("current")
+                fullRef.setValue(currentAmount + self.bid.cost)
+                completionHandler(true)
+            }
+        })
     }
     
 
