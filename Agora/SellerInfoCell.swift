@@ -14,9 +14,18 @@ class SellerInfoCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: CustomImageView!
     
-    func setUpCell(seller: User) {
+    var user: User?
+    var vc: ItemVC?
+    
+    func setUpCell(seller: User, vc: ItemVC) {
+        self.vc = vc
+        self.user = seller
         profileImage.loadImageUsingUrlString(urlString: seller.pictureURL)
         nameLabel.text = seller.name
+    }
+    
+    @IBAction func toUserDetail(_ sender: Any) {
+        vc?.toUserVC(id: (user?.id)!)
     }
     
     override func awakeFromNib() {

@@ -14,7 +14,7 @@ import SwiftMessages
 
 class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var emailLabel: UITextField!
     @IBOutlet weak var phoneLabel: UITextField!
@@ -23,9 +23,18 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var nameLabel: UITextField!
     
     var ref: FIRDatabaseReference!
+    var otherAuthMethod = false
+    var name = ""
+    var email = ""
+    var picURL = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if otherAuthMethod == true {
+            nameLabel.text = name
+            emailLabel.text = email
+            imageView.loadImageUsingUrlString(urlString: picURL)
+        }
         self.hideKeyboardWhenTappedAround()
         
         ref = FIRDatabase.database().reference()

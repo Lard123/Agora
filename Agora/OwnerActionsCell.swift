@@ -42,6 +42,8 @@ class OwnerActionsCell: UITableViewCell {
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive) { (result: UIAlertAction) -> Void in
             let itemRef = self.ref.child("items").child(self.itemID)
             itemRef.removeValue()
+            let userItemRef = self.ref.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("items").child(self.itemID)
+            userItemRef.removeValue()
             self.vc?.performSegue(withIdentifier: "toMarket", sender: self.vc)
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

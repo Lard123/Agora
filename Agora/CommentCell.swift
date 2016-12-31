@@ -18,7 +18,12 @@ class CommentCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: CustomImageView!
     
-    func setUpCell(comment: Comment) {
+    var comment: Comment?
+    var vc: ItemVC?
+    
+    func setUpCell(comment: Comment, vc: ItemVC) {
+        self.vc = vc
+        self.comment = comment
         profileImage.loadImageUsingUrlString(urlString: comment.pictureURL)
         commentLabel.text = comment.comment
         nameLabel.text = comment.name
@@ -28,6 +33,9 @@ class CommentCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    @IBAction func toUserDetail(_ sender: Any) {
+        vc?.toUserVC(id: (comment?.userID)!)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -35,6 +35,7 @@
 		E267D2B91DE68D92003B3F00 /* login.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E267D2B81DE68D92003B3F00 /* login.mp4 */; };
 		E267D2C11DE6A989003B3F00 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267D2C01DE6A989003B3F00 /* Item.swift */; };
 		E267D2C31DE6AB6F003B3F00 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267D2C21DE6AB6F003B3F00 /* ItemCell.swift */; };
+		E27C232F1E17616E007D86C1 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C232E1E17616E007D86C1 /* UserVC.swift */; };
 		E296A0DA1DE772C700007AC1 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0D91DE772C700007AC1 /* GTMSessionFetcher.framework */; };
 		E296A0E21DE7738C00007AC1 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DC1DE7738C00007AC1 /* FirebaseCore.framework */; };
 		E296A0E31DE7738C00007AC1 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DD1DE7738C00007AC1 /* FirebaseInstanceID.framework */; };
@@ -50,6 +51,9 @@
 		E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; };
 		E2A67B401E15AC7200E3CC5A /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2CC1A251E16EF12006D0689 /* UserSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CC1A241E16EF12006D0689 /* UserSettingsVC.swift */; };
+		E2CC1A291E172AE6006D0689 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CC1A281E172AE6006D0689 /* FBSDKLoginKit.framework */; };
+		E2CC1A2B1E172B2B006D0689 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CC1A2A1E172B2B006D0689 /* FBSDKCoreKit.framework */; };
+		E2CC1A2D1E17339F006D0689 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CC1A2C1E17339F006D0689 /* Bolts.framework */; };
 		E2CFE41A1E01D4D30000F4FF /* ItemInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */; };
 		E2E4A1B81E0B4F8600354971 /* OwnerActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1B71E0B4F8600354971 /* OwnerActionsCell.swift */; };
 		E2E4A1BA1E0B527D00354971 /* BidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4A1B91E0B527D00354971 /* BidVC.swift */; };
@@ -102,6 +106,7 @@
 		E267D2B81DE68D92003B3F00 /* login.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login.mp4; sourceTree = "<group>"; };
 		E267D2C01DE6A989003B3F00 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E267D2C21DE6AB6F003B3F00 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		E27C232E1E17616E007D86C1 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		E296A0D21DE7727F00007AC1 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		E296A0D31DE7728500007AC1 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		E296A0D71DE772C100007AC1 /* FirebaseAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = "<group>"; };
@@ -122,6 +127,9 @@
 		E29F885C1E021466000C1F21 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		E29F885E1E021774000C1F21 /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
 		E2CC1A241E16EF12006D0689 /* UserSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsVC.swift; sourceTree = "<group>"; };
+		E2CC1A281E172AE6006D0689 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E2CC1A2A1E172B2B006D0689 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E2CC1A2C1E17339F006D0689 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemInfoCell.swift; sourceTree = "<group>"; };
 		E2E4A1B71E0B4F8600354971 /* OwnerActionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OwnerActionsCell.swift; sourceTree = "<group>"; };
 		E2E4A1B91E0B527D00354971 /* BidVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidVC.swift; sourceTree = "<group>"; };
@@ -140,6 +148,7 @@
 			files = (
 				E25662CA1E0B1D2200805010 /* FirebaseDatabase.framework in Frameworks */,
 				E2A67B3D1E15AC7200E3CC5A /* ImagePicker.framework in Frameworks */,
+				E2CC1A291E172AE6006D0689 /* FBSDKLoginKit.framework in Frameworks */,
 				E25A626B1DF4D03A00F22E40 /* GoogleToolboxForMac.framework in Frameworks */,
 				E25A62611DF4D03A00F22E40 /* FirebaseAnalytics.framework in Frameworks */,
 				E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */,
@@ -149,7 +158,9 @@
 				E296A0E31DE7738C00007AC1 /* FirebaseInstanceID.framework in Frameworks */,
 				E296A0E41DE7738C00007AC1 /* GoogleInterchangeUtilities.framework in Frameworks */,
 				E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */,
+				E2CC1A2D1E17339F006D0689 /* Bolts.framework in Frameworks */,
 				E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */,
+				E2CC1A2B1E172B2B006D0689 /* FBSDKCoreKit.framework in Frameworks */,
 				E2E9D53F1E15AC3B00A8D92C /* ImagePicker.framework in Frameworks */,
 				E25A626F1DF4D03A00F22E40 /* FirebaseAuth.framework in Frameworks */,
 			);
@@ -220,6 +231,16 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
+		E2CC1A2E1E1733A4006D0689 /* FacebookSDK */ = {
+			isa = PBXGroup;
+			children = (
+				E2CC1A281E172AE6006D0689 /* FBSDKLoginKit.framework */,
+				E2CC1A2A1E172B2B006D0689 /* FBSDKCoreKit.framework */,
+				E2CC1A2C1E17339F006D0689 /* Bolts.framework */,
+			);
+			name = FacebookSDK;
+			sourceTree = "<group>";
+		};
 		E2EA0F101DE7B2E00032048D /* TPKeyboardAvoiding */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +255,7 @@
 		E2EA0F111DE7B3A60032048D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2CC1A2E1E1733A4006D0689 /* FacebookSDK */,
 				E229F68F1E00E4450014FF81 /* SwiftGif.swift */,
 				E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */,
 				E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */,
@@ -276,6 +298,7 @@
 		E2EFE7681DE75118002E8003 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E27C232E1E17616E007D86C1 /* UserVC.swift */,
 				E23152521DEBAD3800797269 /* AddNewItemVC.swift */,
 				E267D2B61DE67DF3003B3F00 /* IntroVC.swift */,
 				E22BC67A1DE50DED00A34C59 /* LogInVC.swift */,
@@ -375,6 +398,7 @@
 				E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */,
 				E267D2C11DE6A989003B3F00 /* Item.swift in Sources */,
 				E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				E27C232F1E17616E007D86C1 /* UserVC.swift in Sources */,
 				E2E4A1C01E0B70F000354971 /* Bid.swift in Sources */,
 				E2E4A1B81E0B4F8600354971 /* OwnerActionsCell.swift in Sources */,
 				E22BC67B1DE50DED00A34C59 /* LogInVC.swift in Sources */,

@@ -11,6 +11,8 @@ import AVKit
 import AVFoundation
 import Firebase
 import SwiftMessages
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LogInVC: UIViewController {
 
@@ -19,6 +21,15 @@ class LogInVC: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     
     var player = AVPlayer()
+    var sepAuth = false
+    
+    struct Auth {
+        var email = ""
+        var name = ""
+        var profileURL = ""
+    }
+    
+    var auth = Auth()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +122,62 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func signUpWithFacebook(_ sender: AnyObject) {
+        let alert = UIAlertController(title: "Sign Up via Facebook", message: "Your name, email, and profile picture will automatically be gathered from your account. We will still require your phone number, username, and password.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Proceed", style: UIAlertActionStyle.destructive, handler: { action in
+            self.sepAuth = true
+            let facebookLogin = FBSDKLoginManager()
+            print("Logging In")
+            facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (facebookResult, error) in
+                if error != nil {
+                    self.showLoginError(text: "Facebook login failed.")
+                } else if (facebookResult?.isCancelled)! {
+                    self.showLoginError(text: "Facebook login cancelled.")
+                } else {
+                    if (facebookResult?.grantedPermissions.contains("email"))! {
+                        print("gather")
+                        self.gatherUserData()
+                    }
+                }
+            }
+        }))
         
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
-
+    
+    func gatherUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email, name, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    print("started")
+                    let data:[String:AnyObject] = result as! [String : AnyObject]
+                    print(data)
+                    self.auth.email = data["email"] as! String
+                    self.auth.name = data["name"] as! String
+                    print(self.auth.name)
+                    self.auth.profileURL = (data["picture"]!["data"]!! as! [String : AnyObject])["url"] as! String
+                    self.performSegue(withIdentifier: "toSignUp", sender: self)
+                } else {
+                    print(error.debugDescription)
+                }
+            })
+        } else {
+            print("er")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSignUp" {
+            if sepAuth {
+                let vc = segue.destination as! NewAccountVC
+                vc.otherAuthMethod = true
+                vc.email = auth.email
+                vc.name = auth.name
+                vc.picURL = auth.profileURL
+            }
+        }
+    }
 
 }
 

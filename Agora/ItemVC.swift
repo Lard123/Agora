@@ -32,8 +32,6 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     var item: Item!
     
     var comments = [Comment]()
-    
-    var refreshControl: UIRefreshControl!
 
     var customView: UIView!
     
@@ -42,6 +40,8 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     var imageURLs = [String]()
     
     var ref: FIRDatabaseReference!
+    
+    var toUserVCID = ""
     
     override func viewDidLoad() {
         ref = FIRDatabase.database().reference()
@@ -58,12 +58,6 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         commentView.layer.borderWidth = 0.5
         commentView.layer.borderColor = UIColor(red:0.59, green:0.59, blue:0.60, alpha:1.00).cgColor
         
-        refreshControl = UIRefreshControl()
-        refreshControl.backgroundColor = UIColor.clear
-        refreshControl.tintColor = UIColor.clear
-        self.tableView.insertSubview(refreshControl!, at: 0)
-        
-        loadCustomRefreshContents()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 500
         
@@ -98,12 +92,6 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         return UITableViewAutomaticDimension
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if refreshControl.isRefreshing {
-            
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         
         carousel.contentSize = CGSize(width: self.view.bounds.width * CGFloat(count), height: 200)
@@ -131,18 +119,6 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         return .lightContent
     }
     
-    func loadCustomRefreshContents() {
-        let refreshContents = Bundle.main.loadNibNamed("RefreshContents", owner: self, options: nil)
-        
-        customView = refreshContents?[0] as! UIView
-        customView.frame = refreshControl.bounds
-        
-        let loading = customView.viewWithTag(2) as! UIImageView
-        loading.loadGif(name: "cube")
-        
-        refreshControl.addSubview(customView)
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4 + comments.count
     }
@@ -156,7 +132,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         } else if (indexPath.row == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "sellerInfo", for: indexPath as IndexPath) as! SellerInfoCell
             cell.separatorInset = UIEdgeInsetsMake(0, cell.bounds.size.width, 0, 0)
-            cell.setUpCell(seller: item.seller)
+            cell.setUpCell(seller: item.seller, vc: self)
             return cell
         } else if (indexPath.row == 2) {
             if (FIRAuth.auth()?.currentUser?.uid)! as String != item.seller.id {
@@ -179,7 +155,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "comment", for: indexPath as IndexPath) as! CommentCell
             let comment = comments[indexPath.row - 4]
-            cell.setUpCell(comment: comment)
+            cell.setUpCell(comment: comment, vc: self)
             return cell
         }
     }
@@ -245,8 +221,17 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         } else if segue.identifier == "toSeeBids" {
             let vc = segue.destination as! BidVC
             vc.item = item
+        } else if segue.identifier == "toUserDetail" {
+            let vc = segue.destination as! UserVC
+            vc.userID = toUserVCID
         }
     }
+    
+    func toUserVC(id: String) {
+        toUserVCID = id
+        performSegue(withIdentifier: "toUserDetail", sender: self)
+    }
+    
     
     
     /*

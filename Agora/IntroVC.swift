@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import SwiftMessages
+import Social
 
 class IntroVC: UIViewController, MKMapViewDelegate {
 
@@ -38,6 +39,47 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         getFundedData(completionHandler: { (bool) in
             
         })
+    }
+    
+    @IBAction func shareCampaign(_ sender: Any) {
+        let alert = UIAlertController(title: "Share our campaign!", message: "Share our campaign on social media to increase awareness about Cupertino FBLA's online yard sale fundraiser! You can write your own message or paste to get a preset one!", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Facebook", style: UIAlertActionStyle.default, handler: { action in
+            self.shareFacebook()
+        }))
+        alert.addAction(UIAlertAction(title: "Twitter", style: UIAlertActionStyle.default, handler: {
+            action in
+            self.shareTwitter()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func shareFacebook() {
+        UIPasteboard.general.string = "My FBLA chapter needs help to fund our trip to nationals! Download Agora to see items we are currently selling to raise money!"
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
+            let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            facebookSheet.add(URL(string: "http://tinofbla.org/"))
+            self.present(facebookSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func shareTwitter() {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter){
+            let twitterSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            twitterSheet.setInitialText("My FBLA is raising 💰! Download Agora to see what we're selling to fund our ✈️ to nationals!")
+            twitterSheet.add(#imageLiteral(resourceName: "chs"))
+            twitterSheet.add(URL(string: "http://tinofbla.org/"))
+            self.present(twitterSheet, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,15 +180,13 @@ class IntroVC: UIViewController, MKMapViewDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toMyProfile" {
+            let vc = segue.destination as! UserVC
+            vc.isCurrentUser = true
+        }
     }
-    */
 
 }
 

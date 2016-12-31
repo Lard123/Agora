@@ -148,7 +148,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
                                                                      attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else if condition == "None" {
             self.showAddItemError(text: "Please enter the condition of your item.", headerText: "Add New Item Error")
-        } else if description.replacingOccurrences(of: " ", with: "") == "" {
+        } else if description.replacingOccurrences(of: " ", with: "") == "Description of item..." {
             self.showAddItemError(text: "Please enter an item description.", headerText: "Add New Item Error")
         } else if startingBidField.text == "" || startingBidField.text == "0.00"{
             self.showAddItemError(text: "Please enter a valid starting bid for your item.", headerText: "Add New Item Error")
@@ -175,7 +175,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
                         itemRef.setValue(["name": String(describing: itemName), "condition": String(describing: condition), "seller": String(describing: name), "bid": String(describing: startingBid), "description": String(describing: description), "sellerID": String(describing: userID), "email": String(describing: email), "phone": String(describing: phone), "seller_picture": String(describing: profileURL),"images": self.imgURLs])
                         print("urls")
                         print(self.imgURLs)
-                        self.ref.child("users").child(userID).child("items").childByAutoId().setValue(["item": String(describing: itemRef.key)])
+                        self.ref.child("users").child(userID).child("items").child(itemRef.key).setValue(itemRef.key)
                         let view = MessageView.viewFromNib(layout: .StatusLine)
                         view.button?.removeFromSuperview()
                         view.configureTheme(Theme.success)

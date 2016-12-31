@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
+class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,10 +20,8 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     var loadedOnce = false
     
-    var selectedItem: Item? = nil
+    var selectedItem: Item?
     
-    let transition = BubbleTransition()
-    var centerOfItem = CGPoint.zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +99,6 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedItem = items[indexPath.row]
-        let tappedCell = collectionView.cellForItem(at: indexPath) as! ItemCell
-        centerOfItem = collectionView.convert(tappedCell.center, to: collectionView.superview)
         performSegue(withIdentifier: "toItemDetail", sender: self)
     }
     
@@ -110,28 +106,11 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .present
-        transition.startingPoint = centerOfItem
-        
-        return transition
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.transitionMode = .dismiss
-        transition.startingPoint = centerOfItem
-
-        return transition
-    }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //self.endLoading(vc: self, dismissVC: false)
         if (segue.identifier == "toItemDetail") {
             let auction = segue.destination as! ItemVC
-            //auction.transitioningDelegate = self
-            //auction.modalPresentationStyle = .custom
             auction.item = selectedItem
         }
     }
