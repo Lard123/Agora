@@ -121,6 +121,7 @@ class LogInVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     @IBAction func signUpWithFacebook(_ sender: AnyObject) {
         let alert = UIAlertController(title: "Sign Up via Facebook", message: "Your name, email, and profile picture will automatically be gathered from your account. We will still require your phone number, username, and password.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

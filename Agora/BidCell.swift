@@ -119,6 +119,9 @@ class BidCell: UITableViewCell {
         })
     }
     
+    @IBAction func toUserInfo(_ sender: Any) {
+        vc?.toUserVC(id: bid.userID)
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

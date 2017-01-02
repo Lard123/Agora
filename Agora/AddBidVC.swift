@@ -84,6 +84,19 @@ class AddBidVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func placeBid(_ sender: AnyObject) {
+        if bidTextField.text?.replacingOccurrences(of: " ", with: "") == "" {
+            let view = MessageView.viewFromNib(layout: .CardView)
+            view.button?.removeFromSuperview()
+            
+            view.configureTheme(.error)
+            
+            view.configureDropShadow()
+            
+            view.configureContent(title: "Bidding Error", body: "No bid entered.")
+            
+            SwiftMessages.show(view: view)
+            return
+        }
         let bid = Double((bidTextField.text?.replacingOccurrences(of: ",", with: ""))!)
         if bid! > currentBid {
             let b = NSString(format:"%.2f", bid!) as String

@@ -26,7 +26,6 @@
 		E25662C91E0B189800805010 /* AddBidVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25662C81E0B189800805010 /* AddBidVC.swift */; };
 		E25662CA1E0B1D2200805010 /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; };
 		E25662CB1E0B1D2200805010 /* FirebaseDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0ED1DE785A400007AC1 /* FirebaseDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */; };
 		E25A62611DF4D03A00F22E40 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DB1DE7738C00007AC1 /* FirebaseAnalytics.framework */; };
 		E25A62691DF4D03A00F22E40 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0DF1DE7738C00007AC1 /* GoogleSymbolUtilities.framework */; };
 		E25A626B1DF4D03A00F22E40 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E296A0E01DE7738C00007AC1 /* GoogleToolboxForMac.framework */; };
@@ -50,6 +49,8 @@
 		E2A67B3E1E15AC7200E3CC5A /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; };
 		E2A67B401E15AC7200E3CC5A /* SwiftMessages.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E2BEBEDC1E18392300158C9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BEBEDB1E18392300158C9A /* SystemConfiguration.framework */; };
+		E2BEBEDE1E18392B00158C9A /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BEBEDD1E18392B00158C9A /* SafariServices.framework */; };
 		E2CC1A251E16EF12006D0689 /* UserSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CC1A241E16EF12006D0689 /* UserSettingsVC.swift */; };
 		E2CC1A291E172AE6006D0689 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CC1A281E172AE6006D0689 /* FBSDKLoginKit.framework */; };
 		E2CC1A2B1E172B2B006D0689 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CC1A2A1E172B2B006D0689 /* FBSDKCoreKit.framework */; };
@@ -101,7 +102,6 @@
 		E24E3EE91E023194006F0276 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerInfoCell.swift; sourceTree = "<group>"; };
 		E25662C81E0B189800805010 /* AddBidVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBidVC.swift; sourceTree = "<group>"; };
-		E25A62591DF4CFAE00F22E40 /* SwiftMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftMessages.framework; path = /Users/varunshenoy/Desktop/Projects/Apps/Agora/Agora/SwiftMessages.framework; sourceTree = "<absolute>"; };
 		E267D2B61DE67DF3003B3F00 /* IntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		E267D2B81DE68D92003B3F00 /* login.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login.mp4; sourceTree = "<group>"; };
 		E267D2C01DE6A989003B3F00 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -126,6 +126,8 @@
 		E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		E29F885C1E021466000C1F21 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		E29F885E1E021774000C1F21 /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
+		E2BEBEDB1E18392300158C9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E2BEBEDD1E18392B00158C9A /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		E2CC1A241E16EF12006D0689 /* UserSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsVC.swift; sourceTree = "<group>"; };
 		E2CC1A281E172AE6006D0689 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E2CC1A2A1E172B2B006D0689 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -146,6 +148,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BEBEDE1E18392B00158C9A /* SafariServices.framework in Frameworks */,
+				E2BEBEDC1E18392300158C9A /* SystemConfiguration.framework in Frameworks */,
 				E25662CA1E0B1D2200805010 /* FirebaseDatabase.framework in Frameworks */,
 				E2A67B3D1E15AC7200E3CC5A /* ImagePicker.framework in Frameworks */,
 				E2CC1A291E172AE6006D0689 /* FBSDKLoginKit.framework in Frameworks */,
@@ -159,7 +163,6 @@
 				E296A0E41DE7738C00007AC1 /* GoogleInterchangeUtilities.framework in Frameworks */,
 				E20CF9641DF1103000E3081A /* FirebaseStorage.framework in Frameworks */,
 				E2CC1A2D1E17339F006D0689 /* Bolts.framework in Frameworks */,
-				E25A625A1DF4CFAE00F22E40 /* SwiftMessages.framework in Frameworks */,
 				E2CC1A2B1E172B2B006D0689 /* FBSDKCoreKit.framework in Frameworks */,
 				E2E9D53F1E15AC3B00A8D92C /* ImagePicker.framework in Frameworks */,
 				E25A626F1DF4D03A00F22E40 /* FirebaseAuth.framework in Frameworks */,
@@ -172,6 +175,8 @@
 		E20CF9601DF1102100E3081A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2BEBEDD1E18392B00158C9A /* SafariServices.framework */,
+				E2BEBEDB1E18392300158C9A /* SystemConfiguration.framework */,
 				E20CF9611DF1102200E3081A /* FirebaseStorage.framework */,
 			);
 			name = Frameworks;

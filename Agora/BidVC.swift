@@ -17,7 +17,7 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
     var bids = [Bid]()
     var item: Item!
     var ref: FIRDatabaseReference!
-    var userBid: Bid?
+    var toUserVCID = ""
     
     override func viewDidLoad() {
         tableView.delegate = self
@@ -34,11 +34,6 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         let cell = tableView.dequeueReusableCell(withIdentifier: "bid", for: indexPath as IndexPath) as! BidCell
         cell.setUpCell(bid: bids[indexPath.row], vc: self, itemID: item.firebaseKey)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        userBid = bids[indexPath.row]
-        performSegue(withIdentifier: "offersToUser", sender: self)
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -74,6 +69,11 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         
     }
     
+    func toUserVC(id: String) {
+        toUserVCID = id
+        performSegue(withIdentifier: "offersToUser", sender: self)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -84,7 +84,7 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
             vc.loadedOnce = false
         } else if segue.identifier == "offersToUser" {
             let vc = segue.destination as! UserVC
-            vc.userID = (userBid?.userID)!
+            vc.userID = toUserVCID
         }
     }
 
