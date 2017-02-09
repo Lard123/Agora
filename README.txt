@@ -45,10 +45,6 @@ A: 15% of the earnings that a user receives by selling an item through Agora wil
 
 REQUIREMENTS
 ------------
-
-
-
-
 An iOS device (iOS 8 or higher) or iOS emulator
 •      The device must be able to take a picture or upload a picture file
 •      This app is optimized for iOS capable devices (any screen size)
