@@ -1,4 +1,9 @@
 AGORA
+_____
+
+CALIFORNIA
+BAY SECTION
+CUPERTINO HIGH SCHOOL
 
 CONTENTS OF THIS FILE
 ---------------------
@@ -17,7 +22,7 @@ CONTENTS OF THIS FILE
 
 INTRODUCTION
 ------------
-It's not cheap to attend FBLA Nationals. When your FBLA chapter qualifies to attend this prestigious competition, it comes with a hefty price, which includes the conference ticket, living accommodations, and food. Agora was built to mitigate this issue and enable FBLA chapters to minimize the amount of money needed to go to Nationals. Users can easily add and bid on items. 
+It's not cheap to attend FBLA Nationals. When your FBLA chapter qualifies to attend this prestigious competition, it comes with a hefty price, which includes the conference ticket, living accommodations, and food. Agora was built to mitigate this issue and enable FBLA chapters to minimize the amount of money needed to go to Nationals. Agora is a platform to help FBLA chapters fundraise money for Nationals through a digital yard sale. Users can easily add and bid on items through Agora's intuitive user interface. 
 
 Agora is an iOS app built ground-up with the Swift 3.0 programming language. Various open-source frameworks were used to create an immersive user interface and third-party SDKs (Software Development Kits), such as Firebase and Facebook, were used to expedite the app creation process. 
  
@@ -53,12 +58,12 @@ TROUBLESHOOTING
 
 SOFTWARE USED
 -------------
-Our integrated development environment (IDE) was X-code, which accompanies the default Apple Simulator. To design high quality vector graphics, as well, as the original design for the app, Sketch was used. Additionally, we used Github as storage for both components of the code, as well as UI elements.
+Our integrated development environment (IDE) was Xcode, which accompanies the default Apple Simulator. To design the app and icon, we used Sketch due to its versatility. Additionally, we used Github as storage for both components of the code, as well as UI elements. The Swift 3.0 programming language was used to develop the app.
 
 
 SOURCES OF INFORMATION
 ----------------------
-Since we found promise in developing with Swift, the latest iOS programming language, and had not used the language extensively in the past, we needed to view some tutorials and access the internet for guidance. For assistance on the newly designed language, we referred to a tutorial made by Udemy. Udemy assisted us in setting up the workflow for the application, as well as certain differences in syntax. Beyond Udemy, we used Stack Overflow's free public forums to aid us in errors we had. Extensive iOS development online websites, such as Ray Wenderlich and Brian Advent's YouTube channel, were used when we needed to learn a new concept on iOS, such as playing a video in the background.
+To get acquainted with Apple’s new programming language, Swift 3.0, we used a wide variety of resources. Udemy taught us how to effectively design iOS apps which are both powerful and immersive with the Swift programming language. Beyond Udemy, we used Stack Overflow's free public forums to aid us in errors we had. Extensive iOS development websites, such as Ray Wenderlich and Brian Advent's YouTube channel, were used when we needed to learn a new concept regarding iOS, such as playing a video in the background of a screen.
 
 
 COPYRIGHT NOTATIONS
