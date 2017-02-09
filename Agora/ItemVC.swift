@@ -195,15 +195,21 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         let commentText = commentTextField.text!
         commentTextField.text = ""
         let comment = Comment(comment: commentText, userID: userID, timeStamp: 0.0)
-        comment.getUserInfo()
-        comments.append(comment)
-        let ind = 3 + comments.count
-        let path = IndexPath(row: ind, section: 0)
-        self.view.endEditing(true)
-        let commentRef = ref.child("items").child(item.firebaseKey).child("comments").childByAutoId()
-        commentRef.setValue(["user": String(describing: userID), "comment": String(describing: commentText), "time": NSDate().timeIntervalSince1970])
-        tableView.reloadData()
-        tableView.scrollToRow(at: path, at: UITableViewScrollPosition.bottom, animated: true)
+        let ref = FIRDatabase.database().reference()
+        ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userDict = snapshot.value as? [String : AnyObject] {
+                comment.name = userDict["name"] as! String
+                comment.pictureURL = userDict["image"] as! String
+                self.comments.append(comment)
+                let ind = 3 + self.comments.count
+                let path = IndexPath(row: ind, section: 0)
+                self.view.endEditing(true)
+                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: path, at: UITableViewScrollPosition.bottom, animated: true)
+                let commentRef = ref.child("items").child(self.item.firebaseKey).child("comments").childByAutoId()
+                commentRef.setValue(["user": String(describing: userID), "comment": String(describing: commentText), "time": NSDate().timeIntervalSince1970])
+            }
+        })
     }
     
     // gather all of the current comments on this item

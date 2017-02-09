@@ -41,6 +41,8 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     var userID = ""
     
+    var fromAuctionVC = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -213,7 +215,13 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
                         view.configureContent(title: "Success!", body: "Item successfully uploaded!")
                         view.configureTheme(backgroundColor: UIColor(red:0.00, green:0.69, blue:0.42, alpha:1.00), foregroundColor: UIColor.white)
                         SwiftMessages.show(config: config, view: view)
-                        self.performSegue(withIdentifier: "unwind", sender: self)
+                        
+                        //if the last view was the auction, be sure to reload it
+                        if self.fromAuctionVC {
+                            self.performSegue(withIdentifier: "unwind", sender: self)
+                        } else {
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     }
                 })
             }

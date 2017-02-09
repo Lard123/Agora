@@ -7,7 +7,6 @@ CONTENTS OF THIS FILE
  * Installation
  * Configuration
  * Troubleshooting
- * FAQ
  * Software Used
  * Source of Information
  * Copyright Notations
@@ -18,11 +17,11 @@ CONTENTS OF THIS FILE
 
 INTRODUCTION
 ------------
-It’s not cheap to attend FBLA Nationals. When you’re school’s chapter qualifies to attend this prestigious competition, it comes with a hefty price, which includes the conference ticket, living accomodations, and food. Agora was built to mitigate this issue and enable FBLA chapters to minimize the amount of money needed to go to Nationals. Users can easily add and bid on items. 
+It's not cheap to attend FBLA Nationals. When your FBLA chapter qualifies to attend this prestigious competition, it comes with a hefty price, which includes the conference ticket, living accommodations, and food. Agora was built to mitigate this issue and enable FBLA chapters to minimize the amount of money needed to go to Nationals. Users can easily add and bid on items. 
 
-Agora is an iOS app built with the Swift 3.0 programming language. F
+Agora is an iOS app built ground-up with the Swift 3.0 programming language. Various open-source frameworks were used to create an immersive user interface and third-party SDKs (Software Development Kits), such as Firebase and Facebook, were used to expedite the app creation process. 
  
-For more information, visit http://agora.com/
+For more information, visit http://agora.paperplane.io/
 
 REQUIREMENTS
 ------------
@@ -44,26 +43,10 @@ CONFIGURATION
  
 TROUBLESHOOTING
 ---------------
-∑      If the application takes an unnatural time to respond (over 1 second) it may be due to Wi-Fi connection
+∑      If the application takes an unnatural time to respond (over 5 seconds) it may be due to Wi-Fi connection
 ∑      Files other than images may not be uploaded onto the application
  
-FAQ
----
-Q: Why canít I select photos from my gallery and upload it to my news feed?
-A: PIC is an application meant to upload unaltered pictures for honest review by peers. PIC, in this manner, prevents users from portraying a false persona to their followers. 
-   After all, uploading a picture that is altered no longer gives room to achieve the goals of PIC.
- 
-Q: Why canít I upload media other than pictures to my news feed?
-A: The act of uploading media other than pictures is not in the intention of PIC or its developers. PIC is meant to be an application that allows FBLA members to share their opinions on 
-   style, fashion, and attire. Users need not to upload media other than pictures to share their opinions and clothing choices, pictures are more than sufficient.
 
-Q. What is the cloud at the top left of my screen?
-A. One of the unique features of PIC is that it allows you to take the weather into account. Using the feature allows users to look their best in good weather, and be prepared in case of 
-   a bad weather forcast.
-
-Q. Why can I delete othersí comments and why can others delete my comments?
-A. While the app design allows individuals to delete othersí comments, we felt that such a feature was necessary. Since PICís primary audience is FBLA members, and more specifically, high 
-   school students, the possibility of cyber bullying arises. To prevent such abuse of PIC, we allow individuals to delete othersí comments. This way, people 
  
 SOFTWARE USED
 -------------
@@ -71,17 +54,15 @@ Our integrated development environment (IDE) was X-code, which accompanies the d
 
 SOURCES OF INFORMATION
 ----------------------
-Since we found promise in developing with Swift, the latest iOS programming language, and had not used the language extensively in the past, we needed to view some tutorials and access 
-the internet for guidance. For assistance on the newly designed language, we referred to a tutorial made by Udemy. Udemy assisted us in setting up the workflow for the application, as 
-well as certain differences in syntax. Beyond Udemy, we used Stack Overflow’s free public forums to aid us in errors we had. Extensive iOS development online websites, such as Ray Wenderlich and Brian Advent’s YouTube channel, were used when we needed to learn a new concept on iOS, such as playing a video in the background.
+Since we found promise in developing with Swift, the latest iOS programming language, and had not used the language extensively in the past, we needed to view some tutorials and access the internet for guidance. For assistance on the newly designed language, we referred to a tutorial made by Udemy. Udemy assisted us in setting up the workflow for the application, as well as certain differences in syntax. Beyond Udemy, we used Stack Overflow's free public forums to aid us in errors we had. Extensive iOS development online websites, such as Ray Wenderlich and Brian Advent's YouTube channel, were used when we needed to learn a new concept on iOS, such as playing a video in the background.
 
 COPYRIGHT NOTATIONS
 -------------------
-The following GitHub open-source projects were used:
+The following open-source frameworks were used:
 ∑      Carthage (https://github.com/Carthage/Carthage) was used for managing dependencies.
 ∑      SwiftGif (https://github.com/bahlo/SwiftGif) was used to play animated GIFs within the app.
 ∑      ImagePicker (https://github.com/hyperoslo/ImagePicker) was used to display an elegant camera in the app.
-∑      TPKeyboardAvoiding (https://github.com/michaeltyson/TPKeyboardAvoiding) to make sure that the keyboard doesn’t cover any information field.
+∑      TPKeyboardAvoiding (https://github.com/michaeltyson/TPKeyboardAvoiding) to make sure that the keyboard does not cover any information field.
 ∑      SwiftMessages (https://github.com/SwiftKickMobile/SwiftMessages) was used to display beautiful alerts.
 
 The following SDKs (Sofware Development Kit) were used:
@@ -105,7 +86,9 @@ mobile device.
 
 TEMPLATES USED
 ---------------
-No templates were used in building Agora, just open-source frameworks to create a immersive and intuitive user interface.
+No templates were used in building the Agora app, just open-source frameworks to create a immersive and intuitive user interface.
+
+For the website, we used a template designed by Peter Finlan (https://dribbble.com/peterfinlan) and made available through by w3layouts (https://w3layouts.com/)
 
 MAINTAINERS
 -----------

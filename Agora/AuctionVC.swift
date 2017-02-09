@@ -123,6 +123,9 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         if (segue.identifier == "toItemDetail") {
             let auction = segue.destination as! ItemVC
             auction.item = selectedItem
+        } else if (segue.identifier == "toAddItem") {
+            let vc = segue.destination as! AddNewItemVC
+            vc.fromAuctionVC = true
         }
     }
     
