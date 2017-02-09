@@ -23,17 +23,20 @@ Agora is an iOS app built ground-up with the Swift 3.0 programming language. Var
  
 For more information, visit http://agora.paperplane.io/
 
+
 REQUIREMENTS
 ------------
 ·      An iOS device (iOS 8 or higher) or iOS emulator
 ·      The device must be able to take a picture or upload a picture file
 ·      This app is optimized for iOS capable devices (any screen size)
  
+
 INSTALLATION
 ------------
 ·      This application is not available on the App Store
 ·      Must be run through Xcode via an iPhone Emulator or a connected device
  
+
 CONFIGURATION
 -------------
 ·      Configure user permissions in the Settings application on your device
@@ -41,20 +44,22 @@ CONFIGURATION
 	·      Access to camera/camera roll
 	·      Access to internet (Wi-Fi)
  
+
 TROUBLESHOOTING
 ---------------
 ·      If the application takes an unnatural time to respond (over 5 seconds) it may be due to Wi-Fi connection
 ·      Files other than images may not be uploaded onto the application
  
 
- 
 SOFTWARE USED
 -------------
 Our integrated development environment (IDE) was X-code, which accompanies the default Apple Simulator. To design high quality vector graphics, as well, as the original design for the app, Sketch was used. Additionally, we used Github as storage for both components of the code, as well as UI elements.
 
+
 SOURCES OF INFORMATION
 ----------------------
 Since we found promise in developing with Swift, the latest iOS programming language, and had not used the language extensively in the past, we needed to view some tutorials and access the internet for guidance. For assistance on the newly designed language, we referred to a tutorial made by Udemy. Udemy assisted us in setting up the workflow for the application, as well as certain differences in syntax. Beyond Udemy, we used Stack Overflow's free public forums to aid us in errors we had. Extensive iOS development online websites, such as Ray Wenderlich and Brian Advent's YouTube channel, were used when we needed to learn a new concept on iOS, such as playing a video in the background.
+
 
 COPYRIGHT NOTATIONS
 -------------------
@@ -90,11 +95,13 @@ No templates were used in building the Agora app, just open-source frameworks to
 
 For the website, we used a template designed by Peter Finlan (https://dribbble.com/peterfinlan) and made available through by w3layouts (https://w3layouts.com/)
 
+
 MAINTAINERS
 -----------
 ·      Varun Shenoy
 ·      Naren Ramesh
  
+
 INFORMATION SOURCES
 -------------------
 ·      Stack Overflow
