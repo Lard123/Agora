@@ -77,7 +77,7 @@ Other assets used:
 INSTRUCTIONS FOR RUNNING PROJECT
 --------------------------------
 To run Agora on the Apple iOS Simulator:
-Find and open the Xcode Project, denoted by the “Agora.xcodeproj”. Simply click the the play button at the top left corner when Xcode opens the project. When you are prompted for a device to use, select any device to automatically run Agora on the Simulator.
+Find and open the Xcode Project, denoted by the "Agora.xcodeproj". Simply click the the play button at the top left corner when Xcode opens the project. When you are prompted for a device to use, select any device to automatically run Agora on the Simulator.
 
 To run Agora on a physical iPhone:
 First download the Xcode file project. When opened, find and open the file Xcode Project. Simply click the the play button at the top left corner when Xcode opens the project. Attach any iOS capable device with iOS 8 or above. When you are prompted for a device to use select the device you have attached to automatically run Agora on your phone. Make sure that any prompts are accepted and the file is allowed to run. You may need to go to settings and make sure that the computer being used has permission to run application on the 
@@ -101,7 +101,6 @@ INFORMATION SOURCES
 ∑      Udemy (https://www.udemy.com/devslopes-ios10/)
 ∑      Ray Wenderlich (https://www.raywenderlich.com/)
 ∑      Firebase API iOS Docs (https://firebase.google.com/docs/ios/setup)
-∑      Brian Advent YouTube Tutorials (https://www.youtube.com/channel/  
-       UCysEngjfeIYapEER9K8aikw)
+∑      Brian Advent YouTube Tutorials (https://www.youtube.com/channel/UCysEngjfeIYapEER9K8aikw)
 
 
