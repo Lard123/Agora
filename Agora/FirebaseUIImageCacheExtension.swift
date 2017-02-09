@@ -8,12 +8,14 @@
 
 import UIKit
 
+// create a cache
 let imageCache =  NSCache<AnyObject, AnyObject>()
 
 class CustomImageView: UIImageView {
     
     var imageUrlString: String?
     
+    // load the image from an online url, generally from Firebase Storage
     func loadImageUsingUrlString(urlString: String) {
         
         imageUrlString = urlString
@@ -27,12 +29,14 @@ class CustomImageView: UIImageView {
             return
         }
         
+        // get the image
         URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, respones, error) in
             
             if error != nil {
                 return
             }
             
+            // switch back to main thread for design purposes                                                            
             DispatchQueue.main.async(execute: {
                 
                 let imageToCache = UIImage(data: data!)
