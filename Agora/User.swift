@@ -11,12 +11,15 @@ import Firebase
 import FirebaseDatabase
 
 class User: NSObject {
+    
+    // user attributes
     var name = ""
     var phone = ""
     var email = ""
     var pictureURL = ""
     var id = ""
     
+    // initialize a user from raw information
     init(name: String, phone: String, email: String, pictureURL: String, id: String) {
         self.name = name
         self.phone = phone
@@ -25,10 +28,12 @@ class User: NSObject {
         self.id = id
     }
     
+    // initialize a user just by their ID
     init(sellerID: String) {
         self.id = sellerID
     }
     
+    // get user information from Firebase
     func getUserInfo() {
         let ref = FIRDatabase.database().reference()
         ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
