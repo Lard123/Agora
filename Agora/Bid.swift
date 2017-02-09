@@ -12,6 +12,8 @@ import Firebase
 import FirebaseDatabase
 
 class Bid: NSObject {
+    
+    // bid attributes
     var cost = 0.0
     var timeStamp = ""
     var userID = ""
@@ -21,6 +23,7 @@ class Bid: NSObject {
     var phone = ""
     var numericTimeStamp = 0.0
     
+    // initialize the bid with raw information
     init(cost: Double, userID: String, timeStamp: Double) {
         self.numericTimeStamp = timeStamp
         self.cost = cost
@@ -32,6 +35,7 @@ class Bid: NSObject {
 
     }
     
+    // get the information about the bidder from Firebase
     func getUserInfo(completionHandler:@escaping (Bool) -> ()) {
         let ref = FIRDatabase.database().reference()
         ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
