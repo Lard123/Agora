@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var commentView: UIView!
     
     @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
@@ -29,6 +30,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     
     @IBOutlet weak var postButton: UIButton!
     
+    // data structures to hold information about this item
     var item: Item!
     
     var comments = [Comment]()
@@ -44,32 +46,43 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
     var toUserVCID = ""
     
     override func viewDidLoad() {
+        
+        // create a reference to Firebase
         ref = FIRDatabase.database().reference()
+        
+        // connect the tableView to code
         tableView.delegate = self
         tableView.dataSource = self
         imageURLs = item.imageURLs
         count = imageURLs.count
+        
+        // customize the image carousel
         carousel.delegate = self
         pageControl.numberOfPages = imageURLs.count
         pageCounter.text = "1 of \(count)"
         
         getComments()
         
+        // customize the comment view
         commentView.layer.borderWidth = 0.5
         commentView.layer.borderColor = UIColor(red:0.59, green:0.59, blue:0.60, alpha:1.00).cgColor
         
+        // dynamically sized cells
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 500
         
+        // animate view controller up when comment is being typed
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.hideKeyboardWhenTappedAround()
     }
     
+    // dynamically sized cells
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
+    // animate keyboard when comment is being typed
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -80,6 +93,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         
     }
     
+    // animate keyboard when comment is done being typed
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0{
@@ -88,16 +102,18 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         }
     }
     
+    // dynamically sized cells
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
+        // set the width and usability of the carousel
         carousel.contentSize = CGSize(width: self.view.bounds.width * CGFloat(count), height: 200)
         carousel.showsHorizontalScrollIndicator = false
         
-        
+        // fill the carousel with the item images
         for (index, url) in imageURLs.enumerated() {
             let image = CustomImageView()
             image.loadImageUsingUrlString(urlString: url)
@@ -109,12 +125,14 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         }
     }
     
+    // flip to the next image in the carousel
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = carousel.contentOffset.x/carousel.frame.size.width
         pageControl.currentPage = Int(page)
         pageCounter.text = "\(Int(page) + 1) of \(count)"
     }
     
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -123,6 +141,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         return 4 + comments.count
     }
     
+    // set up each cell in the tableview
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInfo", for: indexPath as IndexPath) as! ItemInfoCell
@@ -160,14 +179,17 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         }
     }
 
+    // custom message to item owner
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // custom email to item owner
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // gather user input and post a comment to Firebase. Add a comment to the current view and animate to it.
     @IBAction func addComment(_ sender: AnyObject) {
         let userID = (FIRAuth.auth()?.currentUser?.uid)! as String
         let commentText = commentTextField.text!
@@ -184,6 +206,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
         tableView.scrollToRow(at: path, at: UITableViewScrollPosition.bottom, animated: true)
     }
     
+    // gather all of the current comments on this item
     func getComments() {
         ref.child("items").child(item.firebaseKey).child("comments").observeSingleEvent(of: .value, with: { (snapshot) in
             //self.beginLoading()
@@ -206,6 +229,7 @@ class ItemVC: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITab
 
     }
     
+    // animate to various other views depending on the button tapped
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddBid" {
             let vc = segue.destination as! AddBidVC

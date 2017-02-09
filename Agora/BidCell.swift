@@ -14,6 +14,7 @@ import SwiftMessages
 
 class BidCell: UITableViewCell {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var profileImage: CustomImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -27,29 +28,24 @@ class BidCell: UITableViewCell {
     var vc: BidVC?
     var ref: FIRDatabaseReference!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     func setUpCell(bid: Bid, vc: BidVC, itemID: String) {
+        
+        // get information about this bid
         bid.getUserInfo(completionHandler: { (bool) in
             self.ref = FIRDatabase.database().reference()
             self.vc = vc
             self.bid = bid
-            print("id: " + bid.userID)
-            print("name: " + bid.name)
-            print("email: " + bid.email)
-            print("image: " + bid.pictureURL)
             
             self.itemID = itemID
             let price = bid.cost as NSNumber
             
+            // format the bid into currency
             let formatter = NumberFormatter()
             formatter.numberStyle = .currency
             
             self.bidAmountLabel.text = formatter.string(from: price)
             
+            // display the bid info
             self.nameLabel.text = bid.name
             self.timeLabel.text = bid.timeStamp
             self.profileImage.loadImageUsingUrlString(urlString: bid.pictureURL)
@@ -57,6 +53,7 @@ class BidCell: UITableViewCell {
         })
     }
     
+    // contact this bidder through email, phone, or text
     @IBAction func contactBidder(_ sender: AnyObject) {
         let alert = UIAlertController(title: "Contact \(bid.name)", message: "How would you like to get in touch with the bidder on this item?", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Email", style: .default, handler: {
@@ -88,6 +85,7 @@ class BidCell: UITableViewCell {
 
     }
     
+    // remove the item from the auction and tell the user to turn in their profits as part of the fundraiser
     @IBAction func sellItemOff(_ sender: AnyObject) {
         let itemRef = self.ref.child("items").child(self.itemID)
         itemRef.removeValue()
@@ -99,13 +97,14 @@ class BidCell: UITableViewCell {
             
             view.configureDropShadow()
             
-            view.configureContent(title: "Item sold!", body: "Item has successfully been sold. Be sure to turn in the money to Mr. St. John in Room 914!")
+            view.configureContent(title: "Item sold!", body: "Item has successfully been sold. Be sure to turn in the money to Room 914!")
             
             SwiftMessages.show(view: view)
             self.vc?.performSegue(withIdentifier: "toMarket", sender: self)
         }
     }
     
+    // update the total dollar value of goods sold
     func increaseTotalFunded(completionHandler:@escaping (Bool) -> ()) {
         ref.child("stats").observeSingleEvent(of: .value, with: { (snapshot) in
             //self.beginLoading()
@@ -121,12 +120,6 @@ class BidCell: UITableViewCell {
     
     @IBAction func toUserInfo(_ sender: Any) {
         vc?.toUserVC(id: bid.userID)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

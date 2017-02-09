@@ -44,7 +44,6 @@
 		E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A0FF1DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m */; };
 		E296A1031DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		E29F885D1E021466000C1F21 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885C1E021466000C1F21 /* ActionCell.swift */; };
-		E29F885F1E021774000C1F21 /* BubbleTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29F885E1E021774000C1F21 /* BubbleTransition.swift */; };
 		E2A67B3D1E15AC7200E3CC5A /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; };
 		E2A67B3E1E15AC7200E3CC5A /* ImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53D1E15AC3B00A8D92C /* ImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E2A67B3F1E15AC7200E3CC5A /* SwiftMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2E9D53E1E15AC3B00A8D92C /* SwiftMessages.framework */; };
@@ -125,7 +124,6 @@
 		E296A1011DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		E296A1021DE7B0D000007AC1 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		E29F885C1E021466000C1F21 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
-		E29F885E1E021774000C1F21 /* BubbleTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleTransition.swift; sourceTree = "<group>"; };
 		E2BEBEDB1E18392300158C9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E2BEBEDD1E18392B00158C9A /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		E2CC1A241E16EF12006D0689 /* UserSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsVC.swift; sourceTree = "<group>"; };
@@ -203,9 +201,9 @@
 			isa = PBXGroup;
 			children = (
 				E2EA0F111DE7B3A60032048D /* Frameworks */,
-				E2EFE7681DE75118002E8003 /* Controller */,
-				E2EFE7671DE75114002E8003 /* View */,
 				E2EFE7661DE7510C002E8003 /* Modal */,
+				E2EFE7671DE75114002E8003 /* View */,
+				E2EFE7681DE75118002E8003 /* Controller */,
 				E267D2B81DE68D92003B3F00 /* login.mp4 */,
 				E20C81C61E03911B00FCAB8B /* cube.gif */,
 				E2EFE76F1DE752FB002E8003 /* Assets.xcassets */,
@@ -291,7 +289,6 @@
 				E229F6831E00C8620014FF81 /* ItemCarouselCell.swift */,
 				E2CFE4191E01D4D30000F4FF /* ItemInfoCell.swift */,
 				E29F885C1E021466000C1F21 /* ActionCell.swift */,
-				E29F885E1E021774000C1F21 /* BubbleTransition.swift */,
 				E24E3EEB1E0233B3006F0276 /* SellerInfoCell.swift */,
 				E224EFF81E04C2CE00D2FE02 /* CommentCell.swift */,
 				E2E4A1B71E0B4F8600354971 /* OwnerActionsCell.swift */,
@@ -350,7 +347,7 @@
 				TargetAttributes = {
 					E22BC6741DE50DED00A34C59 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 5CYVWZB8Z8;
+						DevelopmentTeam = Z3NCCLC5FK;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -399,7 +396,6 @@
 				E23152531DEBAD3800797269 /* AddNewItemVC.swift in Sources */,
 				E20CF9661DF1170A00E3081A /* FirebaseUIImageCacheExtension.swift in Sources */,
 				E229F6881E00CE340014FF81 /* ItemVC.swift in Sources */,
-				E29F885F1E021774000C1F21 /* BubbleTransition.swift in Sources */,
 				E2EA0F0F1DE7B2CE0032048D /* AuctionVC.swift in Sources */,
 				E267D2C11DE6A989003B3F00 /* Item.swift in Sources */,
 				E296A1001DE7B02D00007AC1 /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -549,7 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 5CYVWZB8Z8;
+				DEVELOPMENT_TEAM = Z3NCCLC5FK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Agora",
@@ -574,7 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 5CYVWZB8Z8;
+				DEVELOPMENT_TEAM = Z3NCCLC5FK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Agora",

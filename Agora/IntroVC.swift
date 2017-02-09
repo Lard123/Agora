@@ -16,12 +16,14 @@ import Social
 
 class IntroVC: UIViewController, MKMapViewDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var targetMeter: UIProgressView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var currentAmountLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
     
+    // show Cupertino High School on the map
     var school = CustomPointAnnotation()
     var ref: FIRDatabaseReference!
     var loggedIn = false
@@ -31,16 +33,19 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    // calculate number of days until Nationals
     func daysBetween(start: Date, end: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: start, to: end).day!
     }
-
+    
+    // get amount of money already raised
     override func viewWillAppear(_ animated: Bool) {
         getFundedData(completionHandler: { (bool) in
             
         })
     }
     
+    // use the Social module to share text on Facebook and Twitter
     @IBAction func shareCampaign(_ sender: Any) {
         let alert = UIAlertController(title: "Share our campaign!", message: "Share our campaign on social media to increase awareness about Cupertino FBLA's online yard sale fundraiser! You can write your own message or paste to get a preset one!", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
@@ -55,6 +60,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    // share Agora on Facebook
     func shareFacebook() {
         UIPasteboard.general.string = "My FBLA chapter needs help to fund our trip to nationals! Download Agora to see items we are currently selling to raise money!"
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook){
@@ -68,6 +74,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // share Agora on Twitter
     func shareTwitter() {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter){
             let twitterSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
@@ -101,6 +108,8 @@ class IntroVC: UIViewController, MKMapViewDelegate {
             // Show the message.
             SwiftMessages.show(view: view)
         }
+        
+        // show Cupertino High School on the map and zoom onto it
         self.mapView.delegate = self
         self.school.coordinate = CLLocationCoordinate2DMake(37.3196, -122.0092)
         self.school.imageName = "dusty.png"
@@ -117,6 +126,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // customize the map pin to show our school's mascot, Dusty the Pioneer
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is CustomPointAnnotation) {
             return nil
@@ -138,6 +148,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         return anView
     }
     
+    // gather amount of money already funded
     func getFundedData(completionHandler:@escaping (Bool) -> ()) {
         ref = FIRDatabase.database().reference()
         ref.child("stats").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -145,6 +156,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         })
     }
     
+    // update amount of money and days left from Firebase
     func updateWithDict(snapshot: FIRDataSnapshot) {
         if let dict = snapshot.value as? [String : AnyObject] {
             print(dict)
@@ -170,6 +182,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // get directions to Cupertino High School in Apple Maps
     @IBAction func goToCupertinoHigh(_ sender: AnyObject) {
         let coordinate = CLLocationCoordinate2DMake(school.coordinate.latitude, school.coordinate.longitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
@@ -177,6 +190,7 @@ class IntroVC: UIViewController, MKMapViewDelegate {
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

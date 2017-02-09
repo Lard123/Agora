@@ -10,6 +10,7 @@ import UIKit
 
 class CommentCell: UITableViewCell {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var commentLabel: UILabel!
@@ -22,6 +23,8 @@ class CommentCell: UITableViewCell {
     var vc: ItemVC?
     
     func setUpCell(comment: Comment, vc: ItemVC) {
+        
+        //display this comment with its information and image
         self.vc = vc
         self.comment = comment
         profileImage.loadImageUsingUrlString(urlString: comment.pictureURL)
@@ -30,18 +33,9 @@ class CommentCell: UITableViewCell {
         timeLabel.text = comment.timeStamp
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    // if the comment is tapped on, show the commenter's profile
     @IBAction func toUserDetail(_ sender: Any) {
         vc?.toUserVC(id: (comment?.userID)!)
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

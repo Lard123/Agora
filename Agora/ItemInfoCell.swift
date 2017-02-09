@@ -10,6 +10,7 @@ import UIKit
 
 class ItemInfoCell: UITableViewCell {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var costLabel: UILabel!
@@ -17,13 +18,10 @@ class ItemInfoCell: UITableViewCell {
     @IBOutlet weak var conditionLabel: UILabel!
     
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+
     func setUpCell(obj: Item) {
+        
+        // show information about this item
         nameLabel.text = obj.name
         let price = obj.cost as NSNumber
         
@@ -41,12 +39,6 @@ class ItemInfoCell: UITableViewCell {
         }
         conditionLabel.text = condition
         descriptionLabel.text = obj.descrip
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

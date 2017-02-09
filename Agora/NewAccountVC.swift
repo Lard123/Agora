@@ -14,6 +14,7 @@ import SwiftMessages
 
 class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var emailLabel: UITextField!
@@ -30,28 +31,31 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // load input data from third party authentication (like Facebook)
         if otherAuthMethod == true {
             nameLabel.text = name
             emailLabel.text = email
             imageView.loadImageUsingUrlString(urlString: picURL)
         }
+        
         self.hideKeyboardWhenTappedAround()
         
+        // reference to Firebase database
         ref = FIRDatabase.database().reference()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // create a new account with user input
     @IBAction func makeNewAccount(_ sender: AnyObject) {
+        
+        //fetch user input
         let email = emailLabel.text!
         let password = passwordLabel.text!
         let phone = phoneLabel.text!
         let name = nameLabel.text!
         let reenterPassword = reenterPasswordLabel.text!
+        
+        // if a field is not filled out, alert the user through the UI
         if name == "" {
             self.showSignupError(text: "Please enter a name.", headerText: "Sign Up Error")
             nameLabel.attributedPlaceholder = NSAttributedString(string:"Full Name",
@@ -73,6 +77,8 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         } else if imageView.image == nil{
             imageView.image = #imageLiteral(resourceName: "default_profile")
         } else {
+            
+            //begin loading and create a new account with provided credentials. Alert the user if there are any errors in this process (i.e. password is too short)
             self.beginLoading()
             FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
                 if error == nil {
@@ -98,12 +104,14 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                         })
                     }
                 } else {
+                    self.endLoading(vc: self, dismissVC: false)
                     let errText = (error?.localizedDescription)!
                     if errText == "An internal error has occurred, print and inspect the error details for more information." {
                         self.showSignupError(text:"Check for errors in your entries.", headerText: "Form has been filled out incorrectly.")
                     } else {
                         self.showSignupError(text: (error?.localizedDescription)!, headerText: "Signup Error")
                     }
+                    self.beginLoading()
                 }
             }
         }
@@ -128,9 +136,12 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
     }
     
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    // enable the user to take a profile picture through their camera or select one from their camera roll
     @IBAction func takePicture(_ sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -152,6 +163,7 @@ class NewAccountVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         self.present(alert, animated: true, completion: nil)
     }
     
+    // send selected picture to this view controller
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit

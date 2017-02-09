@@ -12,8 +12,10 @@ import FirebaseDatabase
 
 class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // outlets to user interface items in the view controller
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // array of items on auction
     var items = [Item]()
     
     var ref: FIRDatabaseReference!
@@ -25,10 +27,15 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // create a reference to Firebase
         ref = FIRDatabase.database().reference()
+        
+        // connect the collectionView to code
         collectionView.dataSource = self
         collectionView.delegate = self
-        // Do any additional setup after loading the view.
+        
+        // customize the collectionView with dynamically sized cells and padding
         let screenWidth = UIScreen.main.bounds.size.width
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -39,10 +46,11 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     override func viewDidAppear(_ animated: Bool) {
         if !loadedOnce {
+            
+            //gather data from the auction
             self.beginLoading()
             getData()
             collectionView.alpha = 0
-            //self.collectionView.reloadData()  
             UIView.animate(withDuration: 1, animations: {
                 self.collectionView.alpha = 1
             })
@@ -55,6 +63,7 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    // gather item information from Firebase, node by node
     func getData() {
         ref.child("items").observeSingleEvent(of: .value, with: { (snapshot) in
             self.items = []
@@ -91,18 +100,20 @@ class AuctionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return items.count
     }
     
+    // customize each cell on the auction
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath as IndexPath) as! ItemCell
         cell.setUpCell(obj: items[indexPath.row])
         return cell
     }
     
+    // transition to ItemVC when an item is selected
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedItem = items[indexPath.row]
         performSegue(withIdentifier: "toItemDetail", sender: self)
     }
     
-    
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

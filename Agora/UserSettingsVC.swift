@@ -14,6 +14,7 @@ import SwiftMessages
 
 class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var imageView: CustomImageView!
     
     @IBOutlet weak var nameLabel: UITextField!
@@ -33,9 +34,17 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // hide keyboard when the user taps away from it
         self.hideKeyboardWhenTappedAround()
+        
+        // get the current user's id
         userID = (FIRAuth.auth()?.currentUser?.uid)!
+        
+        // create a reference to Firebase
         ref = FIRDatabase.database().reference()
+        
+        // go through user information and show it on the screen
         ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let userDict = snapshot.value as? [String : AnyObject] {
                 let name = userDict["name"] as! String
@@ -50,19 +59,14 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
 
         })
-        
-        // Do any additional setup after loading the view.
     }
 
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // enable the user to take a profile picture through their camera or select one from their camera roll
     @IBAction func changeProfilePicture(_ sender: Any) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -84,6 +88,7 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(alert, animated: true, completion: nil)
     }
     
+    // send selected picture to this view controller
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             imageChanged = true
@@ -98,7 +103,10 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
     }
 
+    // save new user information to Firebase
     @IBAction func saveInformation(_ sender: Any) {
+        
+        // if information is not valid, display errors
         if newPasswordLabel.text?.replacingOccurrences(of: " ", with: "") != "" {
             if newPasswordLabel.text == retypeNewPasswordLabel.text {
                 FIRAuth.auth()?.currentUser?.updatePassword(newPasswordLabel.text!) { (error) in
@@ -111,8 +119,6 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
             } else {
                 self.showChangeInfoError(text: "Entered passwords do not match.", headerText: "Password Mismatch")
             }
-        } else {
-            self.showChangeInfoError(text: "Password field is empty.", headerText: "Password Error")
         }
         if user?.email != emailLabel.text {
             FIRAuth.auth()?.currentUser?.updateEmail(emailLabel.text!) { (error) in
@@ -124,6 +130,8 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
 
         }
+        
+        // save new data to Firebase
         let emailRef = ref.child("users").child(userID).child("email")
         let nameRef = ref.child("users").child(userID).child("name")
         let phoneRef = ref.child("users").child(userID).child("phone")
@@ -187,7 +195,7 @@ class UserSettingsVC: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
 
-    
+    // sign out of the user's account
     @IBAction func signOut(_ sender: Any) {
         try! FIRAuth.auth()!.signOut()
         performSegue(withIdentifier: "toMain", sender: self)

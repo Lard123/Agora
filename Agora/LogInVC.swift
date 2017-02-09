@@ -16,10 +16,12 @@ import FBSDKLoginKit
 
 class LogInVC: UIViewController {
 
+    // user interface elements in view
     @IBOutlet weak var container: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    // set up a video player and authentication
     var player = AVPlayer()
     var sepAuth = false
     
@@ -33,7 +35,11 @@ class LogInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // hide the keyboard when someone taps outside of it
         self.hideKeyboardWhenTappedAround()
+        
+        // load a background video into the app
         let videoURL: NSURL = Bundle.main.url(forResource: "login", withExtension: "mp4")! as NSURL
         
         player = AVPlayer(url: videoURL as URL)
@@ -59,9 +65,14 @@ class LogInVC: UIViewController {
         player.play()
     }
     
+    // sign in with entered user credentials
     @IBAction func signIn(_ sender: AnyObject) {
+        
+        // fetch email and password
         let email = usernameField.text!
         let password = passwordField.text!
+        
+        // error catching in case information isn't filled out properly
         if email == "" {
             self.showLoginError(text: "Please enter an email.")
             usernameField.attributedPlaceholder = NSAttributedString(string:"EMAIL",
@@ -71,6 +82,8 @@ class LogInVC: UIViewController {
             passwordField.attributedPlaceholder = NSAttributedString(string:"PASSWORD",
                                                                      attributes:[NSForegroundColorAttributeName: UIColor(red:0.99, green:0.24, blue:0.27, alpha:1.00)])
         } else {
+            
+            // begin loading and authenticate with Firebase
             self.beginLoading()
             FIRAuth.auth()?.signIn(withEmail: usernameField.text!, password: passwordField.text!) { (user, error) in
                 if error == nil {
@@ -112,17 +125,15 @@ class LogInVC: UIViewController {
 
     }
     
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     @IBAction func signUpWithFacebook(_ sender: AnyObject) {
+        
+        // use the Facebook API to gather user data such as name, email, and profile picture from the current user's account.
         let alert = UIAlertController(title: "Sign Up via Facebook", message: "Your name, email, and profile picture will automatically be gathered from your account. We will still require your phone number, username, and password.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Proceed", style: UIAlertActionStyle.destructive, handler: { action in
@@ -147,6 +158,7 @@ class LogInVC: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    // gather user's Facebook data through the Facebook Software Development Kit (FBSDK)
     func gatherUserData(){
         if((FBSDKAccessToken.current()) != nil){
             FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email, name, picture.type(large)"]).start(completionHandler: { (connection, result, error) -> Void in
@@ -168,6 +180,7 @@ class LogInVC: UIViewController {
         }
     }
     
+    // transition to next screen after authorization
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSignUp" {
             if sepAuth {
@@ -182,6 +195,7 @@ class LogInVC: UIViewController {
 
 }
 
+// simple public extensions to the view controller for any view to user
 public extension UIViewController {
     @IBAction public func unwindToViewController (_ segue: UIStoryboardSegue){}
     

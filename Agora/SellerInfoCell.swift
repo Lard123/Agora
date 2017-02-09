@@ -10,6 +10,7 @@ import UIKit
 
 class SellerInfoCell: UITableViewCell {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var profileImage: CustomImageView!
@@ -18,25 +19,17 @@ class SellerInfoCell: UITableViewCell {
     var vc: ItemVC?
     
     func setUpCell(seller: User, vc: ItemVC) {
+        
+        // show seller information
         self.vc = vc
         self.user = seller
         profileImage.loadImageUsingUrlString(urlString: seller.pictureURL)
         nameLabel.text = seller.name
     }
     
+    // if the seller is tapped on, show their profile
     @IBAction func toUserDetail(_ sender: Any) {
         vc?.toUserVC(id: (user?.id)!)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

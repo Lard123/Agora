@@ -16,6 +16,7 @@ import SwiftMessages
 
 class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var nameItemField: UITextField!
@@ -31,6 +32,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     @IBOutlet weak var loadingView: UIView!
     
+    // images taken by user and urls to them after storing in Firebase
     var itemImages = [UIImage]()
     var imgURLs = [String:String]()
     let numberFormatter = NumberFormatter()
@@ -41,8 +43,14 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // hide the keyboard when the user taps outside of it
         self.hideKeyboardWhenTappedAround()
+        
+        // create a reference to Firebase
         ref = FIRDatabase.database().reference()
+        
+        // Customize the view controller and connect the collectionView to code
         collectionView.delegate = self
         collectionView.dataSource = self
         descriptionTextView.delegate = self
@@ -51,8 +59,10 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         descriptionTextView.layer.borderColor = UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.00).cgColor
         collectionView!.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
+        // connect the startingBidField to code
         self.startingBidField.delegate = self
         
+        // create a formatter to format money
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumFractionDigits = 2
         numberFormatter.maximumFractionDigits = 2
@@ -64,6 +74,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
+    // Override textView to show placeholder text
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Description of item..."
@@ -71,6 +82,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         }
     }
 
+    // clear textView placeholder text
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.00) {
             textView.text = ""
@@ -78,10 +90,12 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         }
     }
     
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
+    // when the button is tapped, use the ImagePicker module to take up to 5 pictures
     @IBAction func takePictures(_ sender: AnyObject) {
         let imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
@@ -89,16 +103,19 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         present(imagePickerController, animated: true, completion: nil)
     }
     
+    // once the images are taken, return them to this view controller and show them in the collection
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         dismiss(animated: true, completion: nil)
         itemImages = images
         collectionView.reloadData()
     }
     
+    // required implementation
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
     }
     
+    // required implementation
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         
     }
@@ -107,6 +124,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         return itemImages.count
     }
     
+    // customize collectionview to show images taken by user
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath as IndexPath)
         let img = cell.viewWithTag(1) as! UIImageView
@@ -114,6 +132,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         return cell
     }
     
+    // enable the user to select the condition of the item through a pop-up dialog
     @IBAction func itemConditionTapped(_ sender: AnyObject) {
         let alert = UIAlertController(title: "Select the appropriate condition for the item you intend to sell", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "New with Tags", style: .default, handler: {
@@ -130,18 +149,24 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
             self.conditionLabel.text = "Selected Condition: Pre-owned"
             
         }))
+        
+        // present the alert view with buttons
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.popoverPresentationController?.sourceView = sender as? UIView
         alert.popoverPresentationController?.sourceRect = sender.bounds
         self.present(alert, animated: true, completion: nil)
     }
     
+    // send the item to Firebase to store
     @IBAction func submitItem(_ sender: AnyObject) {
-        //self.beginLoading()
+        
+        // gather input info
         let itemName = nameItemField.text!
         let condition = conditionLabel.text!.replacingOccurrences(of: "Selected Condition: ", with: "")
         let description = descriptionTextView.text!
         print("description: " + description)
+        
+        // if a field is not filled out, alert the user through the UI
         if itemName.replacingOccurrences(of: " ", with: "") == "" {
             self.showAddItemError(text: "Please enter an item name.", headerText: "Add New Item Error")
             nameItemField.attributedPlaceholder = NSAttributedString(string:"Name of Item",
@@ -157,13 +182,17 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         }  else if itemImages.count == 0 {
             self.showAddItemError(text: "Please add some images for your item.", headerText: "Add New Item Error")
         } else {
+            
+            // if all of the data is filled out, show a progress animation and save data to Firebase
             loadingGif.loadGif(name: "cube")
             UIView.animate(withDuration: 0.4) {
                 self.loadingView.alpha = 1
             }
-            let startingBid = NSString(format:"%.2f", Double(startingBidField.text!.replacingOccurrences(of: ",", with: ""))!) as String
+            let startingBid = "\(Double(startingBidField.text!.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: ".", with: ""))!/100)"
             let itemRef = ref.child("items").childByAutoId()
             let userID = (FIRAuth.auth()?.currentUser?.uid)!
+            
+            // Use completion handlers to streamline the process
             imagesToURLs { (bool) in
                 self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
                     print("connected")
@@ -211,13 +240,13 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //self.endLoading(vc: self, dismissVC: false)
         if (segue.identifier == "unwind") {
             let auction = segue.destination as! AuctionVC
             auction.loadedOnce = false
         }
     }
     
+    // save the item image on Firebase and retrieve the image url for them
     func imagesToURLs(completionHandler:@escaping (Bool) -> ()) {
         for (index, img) in itemImages.enumerated() {
             let imageName = NSUUID().uuidString
@@ -239,6 +268,7 @@ class AddNewItemVC: UIViewController, UITextViewDelegate, ImagePickerDelegate, U
         }
     }
     
+    // custom method for typing simple money amounts
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         var originalString = textField.text

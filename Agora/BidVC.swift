@@ -13,6 +13,7 @@ import FirebaseDatabase
 
 class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var tableView: UITableView!
     var bids = [Bid]()
     var item: Item!
@@ -20,8 +21,12 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
     var toUserVCID = ""
     
     override func viewDidLoad() {
+        
+        // connect the tableview to code
         tableView.delegate = self
         tableView.dataSource = self
+        
+        // create reference to Firebase
         ref = FIRDatabase.database().reference()
         getBids()
     }
@@ -30,16 +35,19 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         return bids.count
     }
     
+    // customize each cell in tableview
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bid", for: indexPath as IndexPath) as! BidCell
         cell.setUpCell(bid: bids[indexPath.row], vc: self, itemID: item.firebaseKey)
         return cell
     }
     
+    // contact various bidders through messaging
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // contact various bidders through email
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
@@ -48,9 +56,9 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         return 150
     }
     
+    // get all bids from Firebase
     func getBids() {
         ref.child("items").child(item.firebaseKey).child("bids").observeSingleEvent(of: .value, with: { (snapshot) in
-            //self.beginLoading()
             if let json = snapshot.value as? [String : AnyObject] {
                 for dict in json {
                     if let dict = dict.value as? [String : AnyObject] {
@@ -74,6 +82,7 @@ class BidVC: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMai
         performSegue(withIdentifier: "offersToUser", sender: self)
     }
     
+    // white status bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

@@ -12,6 +12,7 @@ import FirebaseDatabase
 
 class OwnerActionsCell: UITableViewCell {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var seeOffersButton: UIButton!
     
     @IBOutlet weak var deleteItemButton: UIButton!
@@ -28,12 +29,14 @@ class OwnerActionsCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // connect to Firebase and customize the delte button to be red
         ref = FIRDatabase.database().reference()
         deleteItemButton.layer.borderWidth = 1
         deleteItemButton.layer.borderColor = UIColor(red:1.00, green:0.17, blue:0.27, alpha:1.00).cgColor
     }
 
+    // show an alert view to confirm the deletion of an item
     @IBAction func deleteCurrentItem(_ sender: AnyObject) {
         // create the alert
         let alert = UIAlertController(title: "Delete Item", message: "Would you like to delete this item from the marketplace?", preferredStyle: UIAlertControllerStyle.alert)
@@ -50,15 +53,6 @@ class OwnerActionsCell: UITableViewCell {
         
         // show the alert
         vc?.present(alert, animated: true, completion: nil)
-    }
-    
-    @IBAction func seeOffersForItem(_ sender: AnyObject) {
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

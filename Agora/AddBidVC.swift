@@ -13,6 +13,7 @@ import SwiftMessages
 
 class AddBidVC: UIViewController, UITextFieldDelegate {
 
+    // outlets to user interface items in the view controller
     @IBOutlet weak var greaterThan: UILabel!
     
     @IBOutlet weak var bidTextField: UITextField!
@@ -26,27 +27,24 @@ class AddBidVC: UIViewController, UITextFieldDelegate {
     var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
+        // create a reference to Firebase
         ref = FIRDatabase.database().reference()
+        
+        // get current bid on item
         let num = currentBid as NSNumber
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         super.viewDidLoad()
         greaterThan.text = "It must be greater than " + formatter.string(from: num)!
         
-        
         self.bidTextField.delegate = self
         
+        // format the new bid
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumFractionDigits = 2
         numberFormatter.maximumFractionDigits = 2
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         var originalString = textField.text
@@ -84,6 +82,8 @@ class AddBidVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func placeBid(_ sender: AnyObject) {
+        
+        // if the bid is valid, post it to Firebase, and close the popup
         if bidTextField.text?.replacingOccurrences(of: " ", with: "") == "" {
             let view = MessageView.viewFromNib(layout: .CardView)
             view.button?.removeFromSuperview()
@@ -97,9 +97,9 @@ class AddBidVC: UIViewController, UITextFieldDelegate {
             SwiftMessages.show(view: view)
             return
         }
-        let bid = Double((bidTextField.text?.replacingOccurrences(of: ",", with: ""))!)
-        if bid! > currentBid {
-            let b = NSString(format:"%.2f", bid!) as String
+        let bid = Double(bidTextField.text!.replacingOccurrences(of: ",", with: "").replacingOccurrences(of: ".", with: ""))!/100
+        if bid > currentBid {
+            let b = NSString(format:"%.2f", bid) as String
             let bidRef = ref.child("items").child(itemID).child("bids").childByAutoId()
             bidRef.setValue(["user": String(describing: userID), "bid": String(describing: b), "time": NSDate().timeIntervalSince1970])
             let newBidRef = ref.child("items").child(itemID).child("bid")

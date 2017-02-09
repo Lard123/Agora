@@ -10,6 +10,7 @@ import UIKit
 
 class ItemCarouselCell: UITableViewCell, UIScrollViewDelegate {
     
+    // outlets to user interface items in the view controller
     @IBOutlet weak var container: UIScrollView!
     
     @IBOutlet weak var imgCounter: UILabel!
@@ -19,6 +20,8 @@ class ItemCarouselCell: UITableViewCell, UIScrollViewDelegate {
     var count = 0
 
     func setUpCell(imageURLs: [String]) {
+        
+        // set up the carosel view and enable paging
         count = imageURLs.count
         container.delegate = self
         pager.size(forNumberOfPages: count)
@@ -29,8 +32,9 @@ class ItemCarouselCell: UITableViewCell, UIScrollViewDelegate {
         container.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
         container.showsHorizontalScrollIndicator = false
         
+        // add each image to the carousel
         for (index, url) in imageURLs.enumerated() {
-            let image = CustomImageView(/*frame: CGRect(x: CGFloat(index) * UIScreen.main.bounds.width, y:0,width:scrollViewWidth, height:scrollViewHeight)*/)
+            let image = CustomImageView()
             image.loadImageUsingUrlString(urlString: url)
             image.contentMode = .scaleAspectFill
             self.container.addSubview(image)
@@ -42,19 +46,9 @@ class ItemCarouselCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // enable the user to scroll through images
         let page = container.contentOffset.x/container.frame.size.width
         pager.currentPage = Int(page)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
