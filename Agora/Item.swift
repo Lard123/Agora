@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Item: NSObject {
+    // item attributes
     var name: String = ""
     var condition: String = ""
     var descrip: String = ""
@@ -18,6 +19,7 @@ class Item: NSObject {
     var seller: User!
     var firebaseKey: String = ""
     
+    // create a Item object
     init(name: String, condition: String, seller: User, imageURLs: [String], cost: Double, description: String, firebaseKey: String) {
         self.name = name
         self.condition = condition
