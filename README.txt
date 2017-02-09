@@ -134,6 +134,6 @@ RAISING AWARENESS OF AGORA
 --------------------------
 To increase publicity and awareness of our mission to minimize the cost to attend FBLA Nationals for Cupertino FBLA members, we realized that building a website and a Facebook page would be crucial. Our social media campaign has just begun, but we plan to increase the awareness of Agora through these two digital resources.
 
-Website: agora.paperplane.io
+Website: http://agora.paperplane.io/
 Facebook: https://www.facebook.com/CupertinoMobileApp2017/
 
