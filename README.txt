@@ -45,29 +45,33 @@ A: 15% of the earnings that a user receives by selling an item through Agora wil
 
 REQUIREMENTS
 ------------
-∑      An iOS device (iOS 8 or higher) or iOS emulator
-∑      The device must be able to take a picture or upload a picture file
-∑      This app is optimized for iOS capable devices (any screen size)
+
+
+
+
+An iOS device (iOS 8 or higher) or iOS emulator
+•      The device must be able to take a picture or upload a picture file
+•      This app is optimized for iOS capable devices (any screen size)
  
 
 INSTALLATION
 ------------
-∑      This application is not available on the App Store
-∑      Must be run through Xcode via an iPhone Emulator or a connected device
+•      This application is not available on the App Store
+•      Must be run through Xcode via an iPhone Emulator or a connected device
  
 
 CONFIGURATION
 -------------
-∑      Configure user permissions in the Settings application on your device
-∑      Permissions
-	∑      Access to camera/camera roll
-	∑      Access to internet (Wi-Fi)
+•      Configure user permissions in the Settings application on your device
+•      Permissions
+	•      Access to camera/camera roll
+	•      Access to internet (Wi-Fi)
  
 
 TROUBLESHOOTING
 ---------------
-∑      If the application takes an unnatural time to respond (over 5 seconds) it may be due to Wi-Fi connection
-∑      Files other than images may not be uploaded onto the application
+•      If the application takes an unnatural time to respond (over 5 seconds) it may be due to Wi-Fi connection
+•      Files other than images may not be uploaded onto the application
  
 
 SOFTWARE USED
@@ -83,19 +87,19 @@ To get acquainted with Apple's new programming language, Swift 3.0, we used a wi
 COPYRIGHT NOTATIONS
 -------------------
 The following open-source frameworks were used:
-∑      Carthage (https://github.com/Carthage/Carthage) was used for managing dependencies.
-∑      SwiftGif (https://github.com/bahlo/SwiftGif) was used to play animated GIFs within the app.
-∑      ImagePicker (https://github.com/hyperoslo/ImagePicker) was used to display an elegant camera in the app.
-∑      TPKeyboardAvoiding (https://github.com/michaeltyson/TPKeyboardAvoiding) to make sure that the keyboard does not cover any information field.
-∑      SwiftMessages (https://github.com/SwiftKickMobile/SwiftMessages) was used to display beautiful alerts.
+•      Carthage (https://github.com/Carthage/Carthage) was used for managing dependencies.
+•      SwiftGif (https://github.com/bahlo/SwiftGif) was used to play animated GIFs within the app.
+•      ImagePicker (https://github.com/hyperoslo/ImagePicker) was used to display an elegant camera in the app.
+•      TPKeyboardAvoiding (https://github.com/michaeltyson/TPKeyboardAvoiding) to make sure that the keyboard does not cover any information field.
+•      SwiftMessages (https://github.com/SwiftKickMobile/SwiftMessages) was used to display beautiful alerts.
 
 The following SDKs (Sofware Development Kit) were used:
-∑      Facebook iOS SDK (https://developers.facebook.com/docs/ios/)
-∑      Firebase iOS SDK (https://firebase.google.com/docs/ios/setup)
+•      Facebook iOS SDK (https://developers.facebook.com/docs/ios/)
+•      Firebase iOS SDK (https://firebase.google.com/docs/ios/setup)
 
 Other assets used:
-∑      Background video on the login page is from Pexels Free Stock Videos (https://videos.pexels.com/)
-∑      All icons were provided for free by Icons8 (https://icons8.com/)
+•      Background video on the login page is from Pexels Free Stock Videos (https://videos.pexels.com/)
+•      All icons were provided for free by Icons8 (https://icons8.com/)
 
 
 INSTRUCTIONS FOR RUNNING PROJECT
@@ -117,17 +121,17 @@ For the website, we used a template designed by Peter Finlan (https://dribbble.c
 
 MAINTAINERS
 -----------
-∑      Varun Shenoy
-∑      Naren Ramesh
+•      Varun Shenoy
+•      Naren Ramesh
  
 
 INFORMATION SOURCES
 -------------------
-∑      Stack Overflow
-∑      Udemy (https://www.udemy.com/devslopes-ios10/)
-∑      Ray Wenderlich (https://www.raywenderlich.com/)
-∑      Firebase API iOS Docs (https://firebase.google.com/docs/ios/setup)
-∑      Brian Advent YouTube Tutorials (https://www.youtube.com/channel/UCysEngjfeIYapEER9K8aikw)
+•      Stack Overflow
+•      Udemy (https://www.udemy.com/devslopes-ios10/)
+•      Ray Wenderlich (https://www.raywenderlich.com/)
+•      Firebase API iOS Docs (https://firebase.google.com/docs/ios/setup)
+•      Brian Advent YouTube Tutorials (https://www.youtube.com/channel/UCysEngjfeIYapEER9K8aikw)
 
 
 RAISING AWARENESS OF AGORA
