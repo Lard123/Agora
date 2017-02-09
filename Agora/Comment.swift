@@ -12,6 +12,8 @@ import Firebase
 import FirebaseDatabase
 
 class Comment: NSObject {
+    
+    // comment attributes
     var comment = ""
     var timeStamp = ""
     var userID = ""
@@ -19,13 +21,16 @@ class Comment: NSObject {
     var pictureURL = ""
     var numericTimeStamp = 0.0
     
+    // initialize a comment with raw data
     init(comment: String, userID: String, timeStamp: Double) {
         self.numericTimeStamp = timeStamp
         self.comment = comment
         self.userID = userID
         if (timeStamp == 0.0) {
+            // if it's a brand new comment, show "now"
             self.timeStamp = "now"
         } else {
+            // otherwise, format the time when the comment was posted
             let date = Date(timeIntervalSince1970: timeStamp)
             let df = DateFormatter()
             df.dateFormat = "MMM d, h:mm a"
@@ -33,6 +38,7 @@ class Comment: NSObject {
         }
     }
     
+    // get infomation about the commenter from Firebase
     func getUserInfo() {
         let ref = FIRDatabase.database().reference()
         ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
