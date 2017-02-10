@@ -30,7 +30,7 @@ class OwnerActionsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        // connect to Firebase and customize the delte button to be red
+        // connect to Firebase and customize the delete button to be red
         ref = FIRDatabase.database().reference()
         deleteItemButton.layer.borderWidth = 1
         deleteItemButton.layer.borderColor = UIColor(red:1.00, green:0.17, blue:0.27, alpha:1.00).cgColor
