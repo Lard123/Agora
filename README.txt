@@ -48,12 +48,15 @@ REQUIREMENTS
 An iOS device (iOS 8 or higher) or iOS emulator
 •      The device must be able to take a picture or upload a picture file
 •      This app is optimized for iOS capable devices (any screen size)
+
+Xcode 8.2.1
+•      This version of Xcode (or newer) is required to run the app since it supports Swift 3.0.1.
  
 
 INSTALLATION
 ------------
 •      This application is not available on the App Store
-•      Must be run through Xcode via an iPhone Emulator or a connected device
+•      Must be run through Xcode 8.2.1 via an iPhone Emulator or a connected device
  
 
 CONFIGURATION
@@ -100,6 +103,9 @@ Other assets used:
 
 INSTRUCTIONS FOR RUNNING PROJECT
 --------------------------------
+
+NOTE: Xcode 8.2.1 or newer is required to run Agora since it supports the latest version of the Swift programming language, 3.0.1
+
 To run Agora on the Apple iOS Simulator:
 Find and open the Xcode Project, denoted by the "Agora.xcodeproj". Simply click the the play button at the top left corner when Xcode opens the project. When you are prompted for a device to use, select any device to automatically run Agora on the Simulator.
 
